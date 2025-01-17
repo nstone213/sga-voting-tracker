@@ -106,7 +106,11 @@ function VoterInterface({ setVote, navigateToResults }) {
   );
 }
 
-function Results({ vote, clearVote, handleLogout }) {
+function Results({ vote, clearVote, handleLogout, closeResults }) {
+  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const getColor = () => {
     if (vote === 'yay') return 'green';
     if (vote === 'nay') return 'red';
@@ -114,28 +118,44 @@ function Results({ vote, clearVote, handleLogout }) {
     return 'gray';
   };
 
+  const handlePasswordSubmit = () => {
+    if (passwordInput === 'PASSWORD') { // Enforce password check
+      clearVote(); // Reset vote when password matches
+      setShowPasswordPopup(false);
+      setPasswordInput('');
+      setPasswordError('');
+    } else {
+      setPasswordError('Wrong password');
+    }
+  };
+
   return (
-    <div className="results-page">
-      <h1>Vote Summary</h1>
-      <div className="vote-square" style={{ backgroundColor: getColor() }} />
-      <button className="clear-button" onClick={clearVote}>Clear</button>
-      <button
-        className="logout-button"
-        onClick={handleLogout}
-        style={{
-          marginTop: '20px',
-          padding: '10px 20px',
-          backgroundColor: '#333',
-          color: 'white',
-          border: 'none',
-          borderRadius: '10px',
-          cursor: 'pointer',
-          fontSize: '16px',
-          transition: 'transform 0.2s',
-        }}
-      >
-        Log Out
-      </button>
+    <div className="results-overlay">
+      <div className={`results-popup ${showPasswordPopup ? 'dimmed' : ''}`}>
+        <button className="close-button" onClick={closeResults}>×</button>
+        <h1>Vote Summary</h1>
+        <div className="vote-square" style={{ backgroundColor: vote ? getColor() : 'white' }} />
+        <button className="clear-button" onClick={() => setShowPasswordPopup(true)}>Clear</button>
+        <button className="logout-button" onClick={handleLogout}>Log Out</button>
+      </div>
+
+      {showPasswordPopup && (
+        <div className="password-overlay">
+          <div className="password-popup">
+            <button className="close-button" onClick={() => setShowPasswordPopup(false)}>×</button>
+            <h2>Enter Password</h2>
+            <input
+              type="password"
+              placeholder="Password"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+              className="password-input"
+            />
+            {passwordError && <p className="password-error">{passwordError}</p>}
+            <button onClick={handlePasswordSubmit} className="submit-button">Submit</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -144,10 +164,6 @@ function App() {
   const [vote, setVote] = useState(null);
   const [username, setUsername] = useState(null);
   const [showResults, setShowResults] = useState(false);
-  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
-  const [passwordInput, setPasswordInput] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [emptyVoteMessage, setEmptyVoteMessage] = useState(false);
 
   useEffect(() => {
     const savedVote = localStorage.getItem('vote');
@@ -161,35 +177,17 @@ function App() {
     }
   }, []);
 
+  const clearVote = () => {
+    setVote(null); // Reset vote in state
+    localStorage.removeItem('vote'); // Remove vote from local storage
+  };
+
   const navigateToResults = () => {
     setShowResults(true);
   };
 
-  const navigateToVoter = () => {
+  const closeResults = () => {
     setShowResults(false);
-  };
-
-  const handlePasswordSubmit = () => {
-    if (passwordInput === 'PASSWORD') {
-      setVote(null);
-      localStorage.removeItem('vote');
-      setPasswordInput('');
-      setPasswordError('');
-      setShowPasswordPopup(false);
-    } else {
-      setPasswordError('Wrong password');
-    }
-  };
-
-  const clearVote = () => {
-    if (!vote) {
-      setEmptyVoteMessage(true);
-      setTimeout(() => {
-        setEmptyVoteMessage(false);
-      }, 1500);
-    } else {
-      setShowPasswordPopup(true);
-    }
   };
 
   const handleLogout = () => {
@@ -203,36 +201,19 @@ function App() {
   return (
     <div className="app">
       {username ? (
-        showResults ? (
-          <Results vote={vote} clearVote={clearVote} handleLogout={handleLogout} />
-        ) : (
+        <>
           <VoterInterface setVote={setVote} navigateToResults={navigateToResults} />
-        )
+          {showResults && (
+            <Results
+              vote={vote}
+              clearVote={clearVote} // Ensure clearVote function is passed correctly
+              handleLogout={handleLogout}
+              closeResults={closeResults}
+            />
+          )}
+        </>
       ) : (
-        <Login setName={setUsername} navigateToVoter={navigateToVoter} />
-      )}
-
-      {showResults && username && <button className="back" onClick={navigateToVoter}>Back</button>}
-
-      {showPasswordPopup && (
-        <div className="password-popup">
-          <h2>Enter Password</h2>
-          <input
-            type="password"
-            placeholder="Password"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            className="password-input"
-          />
-          {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
-          <button onClick={handlePasswordSubmit} className="submit-button">Submit</button>
-        </div>
-      )}
-
-      {emptyVoteMessage && (
-        <div className="empty-vote-message" onClick={() => setEmptyVoteMessage(false)}>
-          <p style={{ color: 'red' }}>Voting records are empty</p>
-        </div>
+        <Login setName={setUsername} navigateToVoter={closeResults} />
       )}
     </div>
   );
