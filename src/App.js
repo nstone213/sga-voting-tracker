@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function VoterInterface({ setVote, navigateToResults }) {
@@ -11,6 +11,7 @@ function VoterInterface({ setVote, navigateToResults }) {
   const lockInVote = () => {
     if (selectedVote) {
       setVote(selectedVote);
+      localStorage.setItem('vote', selectedVote);
     } else {
       alert('Please select a vote before locking in!');
     }
@@ -49,6 +50,13 @@ function Results({ vote }) {
 function App() {
   const [vote, setVote] = useState(null);
   const [showResults, setShowResults] = useState(false);
+
+  useEffect(() => {
+    const savedVote = localStorage.getItem('vote');
+    if (savedVote) {
+      setVote(savedVote);
+    }
+  }, []);
 
   const navigateToResults = () => {
     setShowResults(true);
