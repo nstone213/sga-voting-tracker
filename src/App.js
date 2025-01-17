@@ -25,7 +25,7 @@ function Login({ setName, navigateToVoter }) {
       <h1>Login</h1>
       <input
         type="text"
-        placeholder="Enter your name"
+        placeholder="Last, First"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         onKeyPress={handleKeyPress}
@@ -106,7 +106,7 @@ function VoterInterface({ setVote, navigateToResults }) {
   );
 }
 
-function Results({ vote, clearVote }) {
+function Results({ vote, clearVote, handleLogout }) {
   const getColor = () => {
     if (vote === 'yay') return 'green';
     if (vote === 'nay') return 'red';
@@ -119,6 +119,23 @@ function Results({ vote, clearVote }) {
       <h1>Vote Summary</h1>
       <div className="vote-square" style={{ backgroundColor: getColor() }} />
       <button className="clear-button" onClick={clearVote}>Clear</button>
+      <button
+        className="logout-button"
+        onClick={handleLogout}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#333',
+          color: 'white',
+          border: 'none',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          transition: 'transform 0.2s',
+        }}
+      >
+        Log Out
+      </button>
     </div>
   );
 }
@@ -164,12 +181,6 @@ function App() {
     }
   };
 
-  const handlePasswordKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handlePasswordSubmit();
-    }
-  };
-
   const clearVote = () => {
     if (!vote) {
       setEmptyVoteMessage(true);
@@ -181,11 +192,19 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setUsername(null);
+    setVote(null);
+    localStorage.removeItem('username');
+    localStorage.removeItem('vote');
+    setShowResults(false);
+  };
+
   return (
     <div className="app">
       {username ? (
         showResults ? (
-          <Results vote={vote} clearVote={clearVote} />
+          <Results vote={vote} clearVote={clearVote} handleLogout={handleLogout} />
         ) : (
           <VoterInterface setVote={setVote} navigateToResults={navigateToResults} />
         )
@@ -203,7 +222,6 @@ function App() {
             placeholder="Password"
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
-            onKeyPress={handlePasswordKeyPress}
             className="password-input"
           />
           {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
@@ -220,4 +238,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
