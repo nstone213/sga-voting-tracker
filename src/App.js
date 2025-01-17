@@ -80,6 +80,10 @@ function App() {
   const [vote, setVote] = useState(null);
   const [username, setUsername] = useState(null);
   const [showResults, setShowResults] = useState(false);
+  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [emptyVoteMessage, setEmptyVoteMessage] = useState(false);
 
   useEffect(() => {
     const savedVote = localStorage.getItem('vote');
@@ -101,9 +105,27 @@ function App() {
     setShowResults(false);
   };
 
+  const handlePasswordSubmit = () => {
+    if (passwordInput === 'PASSWORD') {
+      setVote(null);
+      localStorage.removeItem('vote');
+      setPasswordInput('');
+      setPasswordError('');
+      setShowPasswordPopup(false);
+    } else {
+      setPasswordError('Wrong password');
+    }
+  };
+
   const clearVote = () => {
-    setVote(null);
-    localStorage.removeItem('vote');
+    if (!vote) {
+      setEmptyVoteMessage(true);
+      setTimeout(() => {
+        setEmptyVoteMessage(false);
+      }, 1500);
+    } else {
+      setShowPasswordPopup(true);
+    }
   };
 
   return (
@@ -117,7 +139,29 @@ function App() {
       ) : (
         <Login setName={setUsername} navigateToVoter={navigateToVoter} />
       )}
+
       {showResults && username && <button className="back" onClick={navigateToVoter}>Back</button>}
+
+      {showPasswordPopup && (
+        <div className="password-popup">
+          <h2>Enter Password</h2>
+          <input
+            type="password"
+            placeholder="Password"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            className="password-input"
+          />
+          {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+          <button onClick={handlePasswordSubmit} className="submit-button">Submit</button>
+        </div>
+      )}
+
+      {emptyVoteMessage && (
+        <div className="empty-vote-message" onClick={() => setEmptyVoteMessage(false)}>
+          <p style={{ color: 'red' }}>Voting records are empty</p>
+        </div>
+      )}
     </div>
   );
 }
