@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { db, auth, signInAnonymously } from "./firebaseConfig";
-import { collection, doc, setDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
 // Login Component
@@ -47,21 +47,19 @@ function VoterInterface({ user }) {
 
   useEffect(() => {
     const fetchVote = async () => {
-      const votesRef = collection(db, "votes");
-      const querySnapshot = await getDocs(votesRef);
+      const userVoteRef = doc(db, "votes", user.uid);
+      const userVoteSnap = await getDoc(userVoteRef);
 
-      querySnapshot.forEach((doc) => {
-        if (doc.id === user.uid) {
-          setSelectedVote(doc.data().vote);
-          setIsVoteLocked(true);
-        }
-      });
+      if (userVoteSnap.exists()) {
+        setSelectedVote(userVoteSnap.data().vote);
+        setIsVoteLocked(true);
+      }
     };
 
     fetchVote();
   }, [user.uid]);
 
-  const handleVote = async (vote) => {
+  const handleVote = (vote) => {
     if (!isVoteLocked) {
       setSelectedVote(vote);
     }
@@ -171,7 +169,7 @@ function App() {
       {user ? (
         <>
           <VoterInterface user={user} />
-          <button className="results" onClick={() => setShowResults(true)}>
+          <button className="results-button" onClick={() => setShowResults(true)}>
             Show Results
           </button>
           <button className="logout-button" onClick={handleLogout}>
