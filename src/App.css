@@ -1,0 +1,66 @@
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.voter-interface, .results-page {
+  margin: 20px;
+}
+
+.button-group button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.green {
+  background-color: green;
+  color: white;
+}
+
+.red {
+  background-color: red;
+  color: white;
+}
+
+.yellow {
+  background-color: yellow;
+  color: black;
+}
+
+.lock-in {
+  margin-top: 20px;
+  padding: 10px 30px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.results {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: gray;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.vote-square {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  border: 1px solid black;
+}
+
+.back {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: gray;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
