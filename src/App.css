@@ -6,6 +6,33 @@
   padding: 20px;
 }
 
+.login-page {
+  margin: 20px;
+}
+
+.login-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.login-button:hover {
+  transform: scale(1.05);
+}
+
 .voter-interface, .results-page {
   margin: 20px;
 }
@@ -85,4 +112,20 @@
   cursor: pointer;
   border: none;
   border-radius: 10px;
+}
+
+.clear-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.clear-button:hover {
+  transform: scale(1.05);
 }
