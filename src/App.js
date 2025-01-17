@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function Login({ setName, setGtid, navigateToVoter }) {
+function Login({ setName, navigateToVoter }) {
   const [username, setUsername] = useState('');
-  const [gtid, setGtidInput] = useState('');
 
   const handleLogin = () => {
-    if (username.trim() && gtid.trim()) {
+    if (username.trim()) {
       setName(username);
-      setGtid(gtid);
       localStorage.setItem('username', username);
-      localStorage.setItem('gtid', gtid);
       navigateToVoter();
     } else {
-      alert('Please fill out both Name and GTID!');
+      alert('Please enter your name!');
     }
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
       handleLogin();
     }
   };
@@ -28,26 +25,18 @@ function Login({ setName, setGtid, navigateToVoter }) {
       <h1>Login</h1>
       <input
         type="text"
-        placeholder="Enter your name"
+        placeholder="Last, First"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        onKeyPress={handleKeyPress}
         className="login-input"
-        onKeyDown={handleKeyPress}
-      />
-      <input
-        type="text"
-        placeholder="Enter your GTID"
-        value={gtid}
-        onChange={(e) => setGtidInput(e.target.value)}
-        className="login-input"
-        onKeyDown={handleKeyPress}
       />
       <button onClick={handleLogin} className="login-button">Submit</button>
     </div>
   );
 }
 
-function VoterInterface({ setVote, navigateToResults, username }) {
+function VoterInterface({ setVote, navigateToResults }) {
   const [selectedVote, setSelectedVote] = useState(null);
   const [isVoteLocked, setIsVoteLocked] = useState(false);
 
@@ -77,7 +66,6 @@ function VoterInterface({ setVote, navigateToResults, username }) {
 
   return (
     <div className="voter-interface">
-      <div className="user-info">{username}</div>
       <h1>UHR Voting System</h1>
       <div className="button-group">
         <button
@@ -118,7 +106,7 @@ function VoterInterface({ setVote, navigateToResults, username }) {
   );
 }
 
-function Results({ vote, handleLogout }) {
+function Results({ vote, clearVote, handleLogout }) {
   const getColor = () => {
     if (vote === 'yay') return 'green';
     if (vote === 'nay') return 'red';
@@ -130,7 +118,24 @@ function Results({ vote, handleLogout }) {
     <div className="results-page">
       <h1>Vote Summary</h1>
       <div className="vote-square" style={{ backgroundColor: getColor() }} />
-      <button className="clear-button" onClick={handleLogout}>Log out</button>
+      <button className="clear-button" onClick={clearVote}>Clear</button>
+      <button
+        className="logout-button"
+        onClick={handleLogout}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#333',
+          color: 'white',
+          border: 'none',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          transition: 'transform 0.2s',
+        }}
+      >
+        Log Out
+      </button>
     </div>
   );
 }
@@ -138,8 +143,11 @@ function Results({ vote, handleLogout }) {
 function App() {
   const [vote, setVote] = useState(null);
   const [username, setUsername] = useState(null);
-  const [gtid, setGtid] = useState(null);
   const [showResults, setShowResults] = useState(false);
+  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [emptyVoteMessage, setEmptyVoteMessage] = useState(false);
 
   useEffect(() => {
     const savedVote = localStorage.getItem('vote');
@@ -151,11 +159,6 @@ function App() {
     if (savedUsername) {
       setUsername(savedUsername);
     }
-
-    const savedGtid = localStorage.getItem('gtid');
-    if (savedGtid) {
-      setGtid(savedGtid);
-    }
   }, []);
 
   const navigateToResults = () => {
@@ -166,13 +169,34 @@ function App() {
     setShowResults(false);
   };
 
+  const handlePasswordSubmit = () => {
+    if (passwordInput === 'PASSWORD') {
+      setVote(null);
+      localStorage.removeItem('vote');
+      setPasswordInput('');
+      setPasswordError('');
+      setShowPasswordPopup(false);
+    } else {
+      setPasswordError('Wrong password');
+    }
+  };
+
+  const clearVote = () => {
+    if (!vote) {
+      setEmptyVoteMessage(true);
+      setTimeout(() => {
+        setEmptyVoteMessage(false);
+      }, 1500);
+    } else {
+      setShowPasswordPopup(true);
+    }
+  };
+
   const handleLogout = () => {
     setUsername(null);
     setVote(null);
-    setGtid(null);
     localStorage.removeItem('username');
     localStorage.removeItem('vote');
-    localStorage.removeItem('gtid');
     setShowResults(false);
   };
 
@@ -180,19 +204,38 @@ function App() {
     <div className="app">
       {username ? (
         showResults ? (
-          <Results vote={vote} handleLogout={handleLogout} />
+          <Results vote={vote} clearVote={clearVote} handleLogout={handleLogout} />
         ) : (
-          <VoterInterface
-            setVote={setVote}
-            navigateToResults={navigateToResults}
-            username={username}
-          />
+          <VoterInterface setVote={setVote} navigateToResults={navigateToResults} />
         )
       ) : (
-        <Login setName={setUsername} setGtid={setGtid} navigateToVoter={navigateToVoter} />
+        <Login setName={setUsername} navigateToVoter={navigateToVoter} />
+      )}
+
+      {showResults && username && <button className="back" onClick={navigateToVoter}>Back</button>}
+
+      {showPasswordPopup && (
+        <div className="password-popup">
+          <h2>Enter Password</h2>
+          <input
+            type="password"
+            placeholder="Password"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            className="password-input"
+          />
+          {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+          <button onClick={handlePasswordSubmit} className="submit-button">Submit</button>
+        </div>
+      )}
+
+      {emptyVoteMessage && (
+        <div className="empty-vote-message" onClick={() => setEmptyVoteMessage(false)}>
+          <p style={{ color: 'red' }}>Voting records are empty</p>
+        </div>
       )}
     </div>
   );
 }
 
-export default App;
+export default App
