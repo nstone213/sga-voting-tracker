@@ -28,7 +28,7 @@ function Login({ setName, navigateToVoter }) {
         placeholder="Enter your name"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        onKeyPress={handleKeyPress} // Listen for the Enter key
+        onKeyPress={handleKeyPress}
         className="login-input"
       />
       <button onClick={handleLogin} className="login-button">Submit</button>
@@ -38,16 +38,28 @@ function Login({ setName, navigateToVoter }) {
 
 function VoterInterface({ setVote, navigateToResults }) {
   const [selectedVote, setSelectedVote] = useState(null);
+  const [isVoteLocked, setIsVoteLocked] = useState(false);
+
+  useEffect(() => {
+    const savedVote = localStorage.getItem('vote');
+    if (savedVote) {
+      setIsVoteLocked(true);
+      setSelectedVote(savedVote);
+    }
+  }, []);
 
   const handleVote = (vote) => {
-    setSelectedVote(vote);
+    if (!isVoteLocked) {
+      setSelectedVote(vote);
+    }
   };
 
   const lockInVote = () => {
-    if (selectedVote) {
+    if (!isVoteLocked && selectedVote) {
       setVote(selectedVote);
       localStorage.setItem('vote', selectedVote);
-    } else {
+      setIsVoteLocked(true);
+    } else if (!selectedVote) {
       alert('Please select a vote before locking in!');
     }
   };
@@ -56,11 +68,39 @@ function VoterInterface({ setVote, navigateToResults }) {
     <div className="voter-interface">
       <h1>UHR Voting System</h1>
       <div className="button-group">
-        <button className="green" onClick={() => handleVote('yay')}>Yay</button>
-        <button className="red" onClick={() => handleVote('nay')}>Nay</button>
-        <button className="yellow" onClick={() => handleVote('abstain')}>Abstain</button>
+        <button
+          className={`green ${selectedVote === 'yay' ? 'selected' : ''} ${isVoteLocked ? 'disabled' : ''}`}
+          onClick={() => handleVote('yay')}
+          disabled={isVoteLocked}
+        >
+          Yay
+        </button>
+        <button
+          className={`red ${selectedVote === 'nay' ? 'selected' : ''} ${isVoteLocked ? 'disabled' : ''}`}
+          onClick={() => handleVote('nay')}
+          disabled={isVoteLocked}
+        >
+          Nay
+        </button>
+        <button
+          className={`yellow ${selectedVote === 'abstain' ? 'selected' : ''} ${isVoteLocked ? 'disabled' : ''}`}
+          onClick={() => handleVote('abstain')}
+          disabled={isVoteLocked}
+        >
+          Abstain
+        </button>
       </div>
-      <button className="lock-in" onClick={lockInVote}>Lock In</button>
+      <button
+        className="lock-in"
+        style={{
+          backgroundColor: isVoteLocked ? 'gray' : '',
+          cursor: isVoteLocked ? 'not-allowed' : 'pointer',
+        }}
+        onClick={lockInVote}
+        disabled={isVoteLocked}
+      >
+        Lock In
+      </button>
       <button className="results" onClick={navigateToResults}>Results</button>
     </div>
   );
@@ -163,7 +203,7 @@ function App() {
             placeholder="Password"
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
-            onKeyPress={handlePasswordKeyPress} // Listen for the Enter key
+            onKeyPress={handlePasswordKeyPress}
             className="password-input"
           />
           {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
