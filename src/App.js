@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { db, auth, signInAnonymously } from "./firebaseConfig";
+import { collection, doc, setDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
-function Login({ setName, navigateToVoter }) {
-  const [username, setUsername] = useState('');
+// Login Component
+function Login({ setUser }) {
+  const [username, setUsername] = useState("");
 
   const handleLogin = () => {
     if (username.trim()) {
-      setName(username);
-      localStorage.setItem('username', username);
-      navigateToVoter();
+      localStorage.setItem("username", username);
+      signInAnonymously(auth)
+        .then(() => {
+          console.log("User signed in anonymously");
+        })
+        .catch((error) => {
+          console.error("Error signing in", error);
+        });
     } else {
-      alert('Please enter your name!');
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleLogin();
+      alert("Please enter your name!");
     }
   };
 
@@ -28,39 +31,51 @@ function Login({ setName, navigateToVoter }) {
         placeholder="Last, First"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        onKeyPress={handleKeyPress}
         className="login-input"
       />
-      <button onClick={handleLogin} className="login-button">Submit</button>
+      <button onClick={handleLogin} className="login-button">
+        Submit
+      </button>
     </div>
   );
 }
 
-function VoterInterface({ setVote, navigateToResults }) {
+// Voting Interface Component
+function VoterInterface({ user }) {
   const [selectedVote, setSelectedVote] = useState(null);
   const [isVoteLocked, setIsVoteLocked] = useState(false);
 
   useEffect(() => {
-    const savedVote = localStorage.getItem('vote');
-    if (savedVote) {
-      setIsVoteLocked(true);
-      setSelectedVote(savedVote);
-    }
-  }, []);
+    const fetchVote = async () => {
+      const votesRef = collection(db, "votes");
+      const querySnapshot = await getDocs(votesRef);
 
-  const handleVote = (vote) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.id === user.uid) {
+          setSelectedVote(doc.data().vote);
+          setIsVoteLocked(true);
+        }
+      });
+    };
+
+    fetchVote();
+  }, [user.uid]);
+
+  const handleVote = async (vote) => {
     if (!isVoteLocked) {
       setSelectedVote(vote);
     }
   };
 
-  const lockInVote = () => {
-    if (!isVoteLocked && selectedVote) {
-      setVote(selectedVote);
-      localStorage.setItem('vote', selectedVote);
+  const lockInVote = async () => {
+    if (selectedVote && !isVoteLocked) {
+      await setDoc(doc(db, "votes", user.uid), {
+        userId: user.uid,
+        vote: selectedVote,
+      });
       setIsVoteLocked(true);
-    } else if (!selectedVote) {
-      alert('Please select a vote before locking in!');
+    } else {
+      alert("Please select a vote before locking in!");
     }
   };
 
@@ -69,154 +84,106 @@ function VoterInterface({ setVote, navigateToResults }) {
       <h1>UHR Voting System</h1>
       <div className="button-group">
         <button
-          className={`green ${selectedVote === 'yay' ? 'selected' : ''} ${isVoteLocked ? 'disabled' : ''}`}
-          onClick={() => handleVote('yay')}
+          className={`green ${selectedVote === "yay" ? "selected" : ""} ${isVoteLocked ? "disabled" : ""}`}
+          onClick={() => handleVote("yay")}
           disabled={isVoteLocked}
         >
           Yay
         </button>
         <button
-          className={`red ${selectedVote === 'nay' ? 'selected' : ''} ${isVoteLocked ? 'disabled' : ''}`}
-          onClick={() => handleVote('nay')}
+          className={`red ${selectedVote === "nay" ? "selected" : ""} ${isVoteLocked ? "disabled" : ""}`}
+          onClick={() => handleVote("nay")}
           disabled={isVoteLocked}
         >
           Nay
         </button>
         <button
-          className={`yellow ${selectedVote === 'abstain' ? 'selected' : ''} ${isVoteLocked ? 'disabled' : ''}`}
-          onClick={() => handleVote('abstain')}
+          className={`yellow ${selectedVote === "abstain" ? "selected" : ""} ${isVoteLocked ? "disabled" : ""}`}
+          onClick={() => handleVote("abstain")}
           disabled={isVoteLocked}
         >
           Abstain
         </button>
       </div>
-      <button
-        className="lock-in"
-        style={{
-          backgroundColor: isVoteLocked ? 'gray' : '',
-          cursor: isVoteLocked ? 'not-allowed' : 'pointer',
-        }}
-        onClick={lockInVote}
-        disabled={isVoteLocked}
-      >
+      <button className="lock-in" onClick={lockInVote} disabled={isVoteLocked}>
         Lock In
       </button>
-      <button className="results" onClick={navigateToResults}>Results</button>
     </div>
   );
 }
 
-function Results({ vote, clearVote, handleLogout, closeResults }) {
-  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
-  const [passwordInput, setPasswordInput] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+// Results Component
+function Results() {
+  const [votes, setVotes] = useState({ yay: 0, nay: 0, abstain: 0 });
 
-  const getColor = () => {
-    if (vote === 'yay') return 'green';
-    if (vote === 'nay') return 'red';
-    if (vote === 'abstain') return 'yellow';
-    return 'gray';
-  };
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "votes"), (snapshot) => {
+      let voteCounts = { yay: 0, nay: 0, abstain: 0 };
+      snapshot.forEach((doc) => {
+        const vote = doc.data().vote;
+        if (voteCounts[vote] !== undefined) {
+          voteCounts[vote]++;
+        }
+      });
+      setVotes(voteCounts);
+    });
 
-  const handlePasswordSubmit = () => {
-    if (passwordInput === 'PASSWORD') { // Enforce password check
-      clearVote(); // Reset vote when password matches
-      setShowPasswordPopup(false);
-      setPasswordInput('');
-      setPasswordError('');
-    } else {
-      setPasswordError('Wrong password');
-    }
-  };
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="results-overlay">
-      <div className={`results-popup ${showPasswordPopup ? 'dimmed' : ''}`}>
-        <button className="close-button" onClick={closeResults}>×</button>
+      <div className="results-popup">
         <h1>Vote Summary</h1>
-        <div className="vote-square" style={{ backgroundColor: vote ? getColor() : 'white' }} />
-        <button className="clear-button" onClick={() => setShowPasswordPopup(true)}>Clear</button>
-        <button className="logout-button" onClick={handleLogout}>Log Out</button>
+        <p>✅ Yay: {votes.yay}</p>
+        <p>❌ Nay: {votes.nay}</p>
+        <p>⚖️ Abstain: {votes.abstain}</p>
       </div>
-
-      {showPasswordPopup && (
-        <div className="password-overlay">
-          <div className="password-popup">
-            <button className="close-button" onClick={() => setShowPasswordPopup(false)}>×</button>
-            <h2>Enter Password</h2>
-            <input
-              type="password"
-              placeholder="Password"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-              className="password-input"
-            />
-            {passwordError && <p className="password-error">{passwordError}</p>}
-            <button onClick={handlePasswordSubmit} className="submit-button">Submit</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
+// Main App Component
 function App() {
-  const [vote, setVote] = useState(null);
-  const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(null);
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
-    const savedVote = localStorage.getItem('vote');
-    if (savedVote) {
-      setVote(savedVote);
-    }
+    signInAnonymously(auth).then(() => console.log("Signed in anonymously"));
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
 
-    const savedUsername = localStorage.getItem('username');
-    if (savedUsername) {
-      setUsername(savedUsername);
-    }
+    return () => unsubscribe();
   }, []);
 
-  const clearVote = () => {
-    setVote(null); // Reset vote in state
-    localStorage.removeItem('vote'); // Remove vote from local storage
-  };
-
-  const navigateToResults = () => {
-    setShowResults(true);
-  };
-
-  const closeResults = () => {
-    setShowResults(false);
-  };
-
   const handleLogout = () => {
-    setUsername(null);
-    setVote(null);
-    localStorage.removeItem('username');
-    localStorage.removeItem('vote');
-    setShowResults(false);
+    signOut(auth).then(() => {
+      setUser(null);
+      localStorage.removeItem("username");
+    });
   };
 
   return (
     <div className="app">
-      {username ? (
+      {user ? (
         <>
-          <VoterInterface setVote={setVote} navigateToResults={navigateToResults} />
-          {showResults && (
-            <Results
-              vote={vote}
-              clearVote={clearVote} // Ensure clearVote function is passed correctly
-              handleLogout={handleLogout}
-              closeResults={closeResults}
-            />
-          )}
+          <VoterInterface user={user} />
+          <button className="results" onClick={() => setShowResults(true)}>
+            Show Results
+          </button>
+          <button className="logout-button" onClick={handleLogout}>
+            Log Out
+          </button>
+          {showResults && <Results />}
         </>
       ) : (
-        <Login setName={setUsername} navigateToVoter={closeResults} />
+        <Login setUser={setUser} />
       )}
     </div>
   );
 }
 
-export default App
+export default App;
