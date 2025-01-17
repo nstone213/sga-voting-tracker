@@ -14,6 +14,12 @@ function Login({ setName, navigateToVoter }) {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="login-page">
       <h1>Login</h1>
@@ -22,6 +28,7 @@ function Login({ setName, navigateToVoter }) {
         placeholder="Enter your name"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        onKeyPress={handleKeyPress} // Listen for the Enter key
         className="login-input"
       />
       <button onClick={handleLogin} className="login-button">Submit</button>
@@ -117,6 +124,12 @@ function App() {
     }
   };
 
+  const handlePasswordKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handlePasswordSubmit();
+    }
+  };
+
   const clearVote = () => {
     if (!vote) {
       setEmptyVoteMessage(true);
@@ -150,6 +163,7 @@ function App() {
             placeholder="Password"
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
+            onKeyPress={handlePasswordKeyPress} // Listen for the Enter key
             className="password-input"
           />
           {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
