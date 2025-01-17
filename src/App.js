@@ -47,7 +47,7 @@ function VoterInterface({ setVote, navigateToResults }) {
 
   return (
     <div className="voter-interface">
-      <h1>Voter Interface</h1>
+      <h1>UHR Voting System</h1>
       <div className="button-group">
         <button className="green" onClick={() => handleVote('yay')}>Yay</button>
         <button className="red" onClick={() => handleVote('nay')}>Nay</button>
