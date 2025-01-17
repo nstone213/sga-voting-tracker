@@ -150,3 +150,12 @@
 .selected {
   outline: 2px solid black;
 }
+
+.user-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
