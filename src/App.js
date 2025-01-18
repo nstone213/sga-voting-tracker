@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { signInAnonymously, onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc, onSnapshot, collection, deleteDoc, setDoc } from "firebase/firestore";
 import "./App.css";
 import Loader from "./components/loader/Loader";
 import Results from "./components/results/Results";
-import VotingConsole from "./components/votingConsole/VotingConsole"; // Import VotingConsole
+import VotingConsole from "./components/votingConsole/VotingConsole";
+import SignIn from "./components/signin/SignIn";
 import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
@@ -49,26 +50,6 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  const handleLogin = async () => {
-    if (!name.trim()) return;
-    try {
-      const userCredential = await signInAnonymously(auth);
-      const uid = userCredential.user.uid;
-      setUser(userCredential.user);
-
-      await setDoc(doc(db, "users", uid), {
-        name: name,
-        uid: uid,
-        vote: "none",
-        timestamp: new Date(),
-      });
-
-      setSubmitted(true);
-    } catch (error) {
-      console.error("Error signing in anonymously:", error);
-    }
-  };
-
   const handleVote = async (uid, vote) => {
     if (!user || user.uid !== uid) return;
     const userDocRef = doc(db, "users", uid);
@@ -108,18 +89,7 @@ function App() {
       )}
       <h1>UHR Voting System</h1>
       {!submitted ? (
-        <div className="login-container">
-          <p>Enter your name to continue:</p>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your name"
-          />
-          <button onClick={handleLogin} disabled={!name.trim()}>
-            Submit
-          </button>
-        </div>
+        <SignIn setUser={setUser} setName={setName} setSubmitted={setSubmitted} />
       ) : (
         <VotingConsole user={user} votes={votes} handleVote={handleVote} />
       )}
