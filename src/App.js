@@ -1,8 +1,8 @@
 // Import necessary dependencies
 import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from 'firebase/firestore';
+import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from 'firebase/firestore';
 
 // Firebase configuration (replace with your own Firebase config)
 const firebaseConfig = {
@@ -99,6 +99,25 @@ function App() {
     await setDoc(userDocRef, { vote: vote }, { merge: true });
   };
 
+  const handleSignOut = async () => {
+    if (!user) return;
+
+    try {
+      // Delete user data from Firestore
+      await deleteDoc(doc(db, "users", user.uid));
+
+      // Sign the user out
+      await signOut(auth);
+
+      // Reset state
+      setUser(null);
+      setName("");
+      setSubmitted(false);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   // Map vote types to colors
   const voteColors = {
     yay: "green",
@@ -170,7 +189,7 @@ function App() {
                     padding: "10px 20px",
                     margin: "5px",
                     border: votes[user.uid].vote === option ? "3px solid black" : "none",
-                    borderRadius: "10px", // Slightly rounded edges
+                    borderRadius: "10px",
                     cursor: "pointer",
                     fontSize: "16px"
                   }}
@@ -183,6 +202,23 @@ function App() {
           ) : (
             <p>Loading your vote...</p>
           )}
+
+          {/* Sign Out Button */}
+          <button
+            onClick={handleSignOut}
+            style={{
+              marginTop: "30px",
+              padding: "10px 20px",
+              fontSize: "16px",
+              backgroundColor: "darkgray",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer"
+            }}
+          >
+            Sign Out
+          </button>
         </div>
       )}
 
@@ -201,11 +237,10 @@ function App() {
           borderRadius: '10px',
           overflowY: 'auto',
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: "10px",
           justifyContent: 'center'
         }}>
-          {/* Close Button */}
           <button 
             onClick={() => setShowResults(false)}
             style={{
@@ -214,34 +249,24 @@ function App() {
               right: '10px',
               padding: '5px 10px',
               fontSize: '16px',
-              border: 'none',
               backgroundColor: 'red',
               color: 'white',
-              cursor: 'pointer',
-              borderRadius: '5px'
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
             }}
           >
             ✖
           </button>
 
-          <h2>Voting Results</h2>
-          <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "10px",
-            justifyContent: "center",
-            padding: "10px"
-          }}>
-            {Object.entries(votes).map(([uid, data]) => (
-              <div key={uid} style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: voteColors[data.vote || "none"],
-                display: 'inline-block',
-                borderRadius: '5px'
-              }} title={data.name}></div>
-            ))}
-          </div>
+          {Object.entries(votes).map(([uid, data]) => (
+            <div key={uid} style={{
+              width: '50px',
+              height: '50px',
+              backgroundColor: voteColors[data.vote || "none"],
+              borderRadius: '5px'
+            }} title={data.name}></div>
+          ))}
         </div>
       )}
     </div>
