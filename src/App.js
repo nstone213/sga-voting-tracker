@@ -107,6 +107,7 @@ function App() {
   return (
     <div className="container">
       {submitted && name && <div className="user-name">{name}</div>}
+      <p className="user-id">User ID: {user?.uid}</p>
       {submitted && (
         <>
           <button onClick={() => setShowResults(true)} className="results-button">
@@ -133,7 +134,6 @@ function App() {
         </div>
       ) : (
         <div className="voting-container">
-          <p>User ID: {user?.uid}</p>
           {user?.uid && votes[user.uid] ? (
             <div className="vote-buttons">
               {["yay", "nay", "abstain"].map((option) => (

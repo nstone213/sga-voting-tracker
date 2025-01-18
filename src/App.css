@@ -13,6 +13,14 @@
   font-weight: bold;
 }
 
+.user-id {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  font-size: smaller;
+  color: rgb(74, 72, 72);
+}
+
 /* Results button styling */
 .results-button {
   position: absolute;
