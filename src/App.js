@@ -108,9 +108,14 @@ function App() {
     <div className="container">
       {submitted && name && <div className="user-name">{name}</div>}
       {submitted && (
-        <button onClick={() => setShowResults(true)} className="results-button">
-          Results
-        </button>
+        <>
+          <button onClick={() => setShowResults(true)} className="results-button">
+            Results
+          </button>
+          <button onClick={handleSignOut} className="sign-out-button">
+            Sign Out
+          </button>
+        </>
       )}
       <h1>UHR Voting System</h1>
       {!submitted ? (
@@ -144,9 +149,6 @@ function App() {
           ) : (
             <p>Loading your vote...</p>
           )}
-          <button onClick={handleSignOut} className="sign-out-button">
-            Sign Out
-          </button>
         </div>
       )}
       {showResults && (
