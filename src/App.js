@@ -134,7 +134,7 @@ function App() {
           {name}
         </div>
       )}
-
+  
       {/* Results button in top right corner */}
       {submitted && (
         <button 
@@ -155,9 +155,9 @@ function App() {
           Results
         </button>
       )}
-
-      <h1>React + Firebase Voting System</h1>
-
+  
+      <h1>UHR Voting System</h1>
+  
       {!submitted ? (
         <div>
           <p>Enter your name to continue:</p>
@@ -172,14 +172,22 @@ function App() {
           </button>
         </div>
       ) : (
-        <div>
-          <p>Signed in as: {name}</p>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '50vh' // Adjust as needed
+        }}>
           <p>User ID: {user?.uid}</p>
-          <p>Anonymous: {user?.isAnonymous ? 'Yes' : 'No'}</p>
-
-          <h2>Your Vote</h2>
+  
           {user?.uid && votes[user.uid] ? (
-            <div>
+            <div style={{
+              display: 'flex',
+              
+              alignItems: 'center',
+              gap: '10px'
+            }}>
               {["yay", "nay", "abstain"].map((option) => (
                 <button
                   key={option}
@@ -202,7 +210,7 @@ function App() {
           ) : (
             <p>Loading your vote...</p>
           )}
-
+  
           {/* Sign Out Button */}
           <button
             onClick={handleSignOut}
@@ -221,7 +229,7 @@ function App() {
           </button>
         </div>
       )}
-
+  
       {/* Results Modal */}
       {showResults && (
         <div style={{
@@ -258,7 +266,7 @@ function App() {
           >
             ✖
           </button>
-
+  
           {Object.entries(votes).map(([uid, data]) => (
             <div key={uid} style={{
               width: '50px',
@@ -270,7 +278,7 @@ function App() {
         </div>
       )}
     </div>
-  );
+  );  
 }
 
 export default App;
