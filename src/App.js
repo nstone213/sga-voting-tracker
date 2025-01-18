@@ -30,7 +30,7 @@ function App() {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [checkboxes, setCheckboxes] = useState({}); // Store all users' checkboxes
-  const [showResults, setShowResults] = useState(false); // Toggle for results view
+  const [showResults, setShowResults] = useState(false); // Toggle for results modal
 
   useEffect(() => {
     // Listen for authentication state changes
@@ -115,7 +115,7 @@ function App() {
       {/* Results button in top right corner */}
       {submitted && (
         <button 
-          onClick={() => setShowResults(!showResults)}
+          onClick={() => setShowResults(true)}
           style={{
             position: 'absolute',
             top: '10px',
@@ -129,7 +129,7 @@ function App() {
             fontSize: '14px'
           }}
         >
-          {showResults ? "Hide Results" : "Results"}
+          Results
         </button>
       )}
 
@@ -154,41 +154,75 @@ function App() {
           <p>User ID: {user?.uid}</p>
           <p>Anonymous: {user?.isAnonymous ? 'Yes' : 'No'}</p>
 
-          <h2>{showResults ? "All Users' Checkboxes" : "Your Checkbox"}</h2>
-
-          {showResults ? (
-            // Show all users' checkboxes when results are toggled on
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {Object.entries(checkboxes).map(([uid, data]) => (
-                <li key={uid} style={{ marginBottom: '10px' }}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={data.checked || false}
-                      disabled // Users cannot change others' checkboxes
-                    />
-                    {` ${data.name}`}
-                  </label>
-                </li>
-              ))}
-            </ul>
+          <h2>Your Checkbox</h2>
+          {user?.uid && checkboxes[user.uid] ? (
+            <label>
+              <input
+                type="checkbox"
+                checked={checkboxes[user.uid].checked || false}
+                onChange={() => handleCheckboxChange(user.uid)}
+              />
+              {` ${name}`}
+            </label>
           ) : (
-            // Show only the logged-in user's checkbox
-            <div>
-              {user?.uid && checkboxes[user.uid] ? (
+            <p>Loading your checkbox...</p>
+          )}
+        </div>
+      )}
+
+      {/* Results Modal */}
+      {showResults && (
+        <div style={{
+          position: 'fixed',
+          top: '15%',
+          left: '15%',
+          width: '70%',
+          height: '70%',
+          backgroundColor: 'white',
+          boxShadow: '0px 0px 15px rgba(0,0,0,0.3)',
+          padding: '20px',
+          zIndex: 1000,
+          borderRadius: '10px',
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          {/* Close Button */}
+          <button 
+            onClick={() => setShowResults(false)}
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              padding: '5px 10px',
+              fontSize: '16px',
+              border: 'none',
+              backgroundColor: 'red',
+              color: 'white',
+              cursor: 'pointer',
+              borderRadius: '5px'
+            }}
+          >
+            ✖
+          </button>
+
+          <h2>All Users' Checkboxes</h2>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {Object.entries(checkboxes).map(([uid, data]) => (
+              <li key={uid} style={{ marginBottom: '10px' }}>
                 <label>
                   <input
                     type="checkbox"
-                    checked={checkboxes[user.uid].checked || false}
-                    onChange={() => handleCheckboxChange(user.uid)}
+                    checked={data.checked || false}
+                    disabled // Users cannot change others' checkboxes
                   />
-                  {` ${name}`}
+                  {` ${data.name}`}
                 </label>
-              ) : (
-                <p>Loading your checkbox...</p>
-              )}
-            </div>
-          )}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
