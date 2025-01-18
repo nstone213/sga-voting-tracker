@@ -1,0 +1,146 @@
+/* General container styling */
+.container {
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+}
+
+/* User name display */
+.user-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-weight: bold;
+}
+
+/* Results button styling */
+.results-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 15px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Login container */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Voting container */
+.voting-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+/* Vote buttons */
+.vote-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vote-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  border: none;
+}
+
+.vote-button.yay {
+  background-color: green;
+}
+
+.vote-button.nay {
+  background-color: red;
+}
+
+.vote-button.abstain {
+  background-color: yellow;
+  color: black;
+}
+
+.vote-button.selected {
+  border: 3px solid black;
+}
+
+/* Sign out button */
+.sign-out-button {
+  margin-top: 30px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: darkgray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Results modal */
+.results-modal {
+  position: fixed;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  background-color: white;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Vote boxes in results */
+.vote-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.vote-box.yay {
+  background-color: green;
+}
+
+.vote-box.nay {
+  background-color: red;
+}
+
+.vote-box.abstain {
+  background-color: yellow;
+}
+
+.vote-box.none {
+  background-color: gray;
+}
