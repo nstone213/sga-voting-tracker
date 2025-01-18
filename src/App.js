@@ -1,32 +1,21 @@
-// Import necessary dependencies
-import React, { useEffect, useState } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from "react";
+import { 
+  signInAnonymously, 
+  onAuthStateChanged, 
+  signOut 
+} from "firebase/auth";
+import { 
+  doc, 
+  setDoc, 
+  getDoc, 
+  onSnapshot, 
+  collection, 
+  deleteDoc 
+} from "firebase/firestore";
 import "./App.css";
 import Loader from "./Loader";
 import Results from "./Results";
-
-// Firebase configuration (replace with your own Firebase config)
-const firebaseConfig = {
-  apiKey: "AIzaSyBy5ohxm1S0RNBFmdZLF3mblUrvrPPfvIQ",
-  authDomain: "sga-voting-application.firebaseapp.com",
-  projectId: "sga-voting-application",
-  storageBucket: "sga-voting-application.firebasestorage.app",
-  messagingSenderId: "590561514324",
-  appId: "1:590561514324:web:f34408ff4064747695aec1",
-  measurementId: "G-0EY4HZRQ23"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Set authentication persistence
-setPersistence(auth, browserSessionPersistence).catch((error) => {
-  console.error("Error setting persistence:", error);
-});
+import { auth, db } from "./firebaseConfig"; // Import Firebase config
 
 function App() {
   const [user, setUser] = useState(null);
