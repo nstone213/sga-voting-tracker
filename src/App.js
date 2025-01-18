@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from 'firebase/firestore';
 
-// Firebase configuration (replace with your own config from Firebase Console)
+// Firebase configuration (replace with your own Firebase config)
 const firebaseConfig = {
   apiKey: "AIzaSyBy5ohxm1S0RNBFmdZLF3mblUrvrPPfvIQ",
   authDomain: "sga-voting-application.firebaseapp.com",
@@ -29,6 +29,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [checkboxes, setCheckboxes] = useState({}); // Store all users' checkboxes
 
   useEffect(() => {
     // Listen for authentication state changes
@@ -36,6 +37,7 @@ function App() {
       if (user) {
         setUser(user);
         const userDoc = await getDoc(doc(db, "users", user.uid));
+
         if (userDoc.exists()) {
           setName(userDoc.data().name);
           setSubmitted(true);
@@ -47,22 +49,62 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    // Listen for checkbox updates in Firestore
+    const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
+      console.log("Firestore Snapshot Triggered"); // Debugging
+
+      if (snapshot.empty) {
+        console.warn("No documents found in Firestore.");
+        setCheckboxes({});
+        return;
+      }
+
+      const updatedCheckboxes = {};
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        updatedCheckboxes[doc.id] = data;
+      });
+
+      console.log("Fetched checkboxes:", updatedCheckboxes); // Debugging
+      setCheckboxes(updatedCheckboxes);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleLogin = async () => {
     if (!name.trim()) return;
     try {
       const userCredential = await signInAnonymously(auth);
       const uid = userCredential.user.uid;
       setUser(userCredential.user);
-      
+
+      console.log("User signed in:", { uid, name }); // Debugging
+
+      // Store user data in Firestore with a default checkbox state
       await setDoc(doc(db, "users", uid), {
         name: name,
         uid: uid,
+        checked: false, // Default checkbox state
         timestamp: new Date()
       });
-      
+
       setSubmitted(true);
     } catch (error) {
       console.error("Error signing in anonymously:", error);
+    }
+  };
+
+  const handleCheckboxChange = async (uid) => {
+    if (!user || user.uid !== uid) return; // Only allow the owner to change their checkbox
+
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
+    
+    if (userDoc.exists()) {
+      await setDoc(userDocRef, { checked: !userDoc.data().checked }, { merge: true });
+      console.log(`Checkbox for ${uid} updated to:`, !userDoc.data().checked); // Debugging
     }
   };
 
@@ -73,7 +115,8 @@ function App() {
           {name}
         </div>
       )}
-      <h1>React + Firebase Anonymous Auth</h1>
+      <h1>React + Firebase Anonymous Auth with Checkboxes</h1>
+
       {!submitted ? (
         <div>
           <p>Enter your name to continue:</p>
@@ -92,6 +135,27 @@ function App() {
           <p>Signed in as: {name}</p>
           <p>User ID: {user?.uid}</p>
           <p>Anonymous: {user?.isAnonymous ? 'Yes' : 'No'}</p>
+
+          <h2>Users & Checkboxes</h2>
+          {Object.keys(checkboxes).length === 0 ? (
+            <p>No users found. Please refresh the page or check Firestore.</p>
+          ) : (
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {Object.entries(checkboxes).map(([uid, data]) => (
+                <li key={uid} style={{ marginBottom: '10px' }}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={data.checked || false}
+                      onChange={() => handleCheckboxChange(uid)}
+                      disabled={user?.uid !== uid} // Disable checkbox for other users
+                    />
+                    {` ${data.name}`}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
     </div>
