@@ -116,7 +116,7 @@ function App() {
   return (
     <div className="container">
       {submitted && name && <div className="user-name">{name}</div>}
-      <p className="user-id">User ID: {user?.uid}</p>
+      {submitted && <p className="user-id">User ID: {user?.uid}</p>}
       {submitted && (
         <>
           <button onClick={() => setShowResults(true)} className="results-button">
