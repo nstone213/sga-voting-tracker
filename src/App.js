@@ -29,7 +29,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [checkboxes, setCheckboxes] = useState({}); // Store all users' checkboxes
+  const [votes, setVotes] = useState({}); // Store all users' votes
   const [showResults, setShowResults] = useState(false); // Toggle for results modal
 
   useEffect(() => {
@@ -51,21 +51,21 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Listen for checkbox updates in Firestore
+    // Listen for vote updates in Firestore
     const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
       if (snapshot.empty) {
         console.warn("No documents found in Firestore.");
-        setCheckboxes({});
+        setVotes({});
         return;
       }
 
-      const updatedCheckboxes = {};
+      const updatedVotes = {};
       snapshot.forEach((doc) => {
         const data = doc.data();
-        updatedCheckboxes[doc.id] = data;
+        updatedVotes[doc.id] = data;
       });
 
-      setCheckboxes(updatedCheckboxes);
+      setVotes(updatedVotes);
     });
 
     return () => unsubscribe();
@@ -78,11 +78,11 @@ function App() {
       const uid = userCredential.user.uid;
       setUser(userCredential.user);
 
-      // Store user data in Firestore with a default checkbox state
+      // Store user data in Firestore with a default vote state
       await setDoc(doc(db, "users", uid), {
         name: name,
         uid: uid,
-        checked: false, // Default checkbox state
+        vote: "none", // Default vote
         timestamp: new Date()
       });
 
@@ -92,15 +92,19 @@ function App() {
     }
   };
 
-  const handleCheckboxChange = async (uid) => {
-    if (!user || user.uid !== uid) return; // Only allow the owner to change their checkbox
+  const handleVote = async (uid, vote) => {
+    if (!user || user.uid !== uid) return; // Only allow the owner to vote
 
     const userDocRef = doc(db, "users", uid);
-    const userDoc = await getDoc(userDocRef);
-    
-    if (userDoc.exists()) {
-      await setDoc(userDocRef, { checked: !userDoc.data().checked }, { merge: true });
-    }
+    await setDoc(userDocRef, { vote: vote }, { merge: true });
+  };
+
+  // Map vote types to colors
+  const voteColors = {
+    yay: "green",
+    nay: "red",
+    abstain: "yellow",
+    none: "gray"
   };
 
   return (
@@ -133,7 +137,7 @@ function App() {
         </button>
       )}
 
-      <h1>React + Firebase Anonymous Auth with Checkboxes</h1>
+      <h1>React + Firebase Voting System</h1>
 
       {!submitted ? (
         <div>
@@ -154,18 +158,30 @@ function App() {
           <p>User ID: {user?.uid}</p>
           <p>Anonymous: {user?.isAnonymous ? 'Yes' : 'No'}</p>
 
-          <h2>Your Checkbox</h2>
-          {user?.uid && checkboxes[user.uid] ? (
-            <label>
-              <input
-                type="checkbox"
-                checked={checkboxes[user.uid].checked || false}
-                onChange={() => handleCheckboxChange(user.uid)}
-              />
-              {` ${name}`}
-            </label>
+          <h2>Your Vote</h2>
+          {user?.uid && votes[user.uid] ? (
+            <div>
+              <button 
+                style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', margin: '5px', border: 'none', cursor: 'pointer' }}
+                onClick={() => handleVote(user.uid, "yay")}
+              >
+                Yay
+              </button>
+              <button 
+                style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', margin: '5px', border: 'none', cursor: 'pointer' }}
+                onClick={() => handleVote(user.uid, "nay")}
+              >
+                Nay
+              </button>
+              <button 
+                style={{ backgroundColor: 'yellow', color: 'black', padding: '10px 20px', margin: '5px', border: 'none', cursor: 'pointer' }}
+                onClick={() => handleVote(user.uid, "abstain")}
+              >
+                Abstain
+              </button>
+            </div>
           ) : (
-            <p>Loading your checkbox...</p>
+            <p>Loading your vote...</p>
           )}
         </div>
       )}
@@ -208,21 +224,17 @@ function App() {
             ✖
           </button>
 
-          <h2>All Users' Checkboxes</h2>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {Object.entries(checkboxes).map(([uid, data]) => (
-              <li key={uid} style={{ marginBottom: '10px' }}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={data.checked || false}
-                    disabled // Users cannot change others' checkboxes
-                  />
-                  {` ${data.name}`}
-                </label>
-              </li>
-            ))}
-          </ul>
+          <h2>Voting Results</h2>
+          {Object.entries(votes).map(([uid, data]) => (
+            <div key={uid} style={{
+              width: '50px',
+              height: '50px',
+              backgroundColor: voteColors[data.vote || "none"],
+              margin: '10px',
+              display: 'inline-block',
+              borderRadius: '5px'
+            }} title={data.name}></div>
+          ))}
         </div>
       )}
     </div>
