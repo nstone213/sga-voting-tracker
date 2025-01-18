@@ -6,7 +6,7 @@ import Loader from "./components/loader/Loader";
 import Results from "./components/results/Results";
 import VotingConsole from "./components/votingConsole/VotingConsole";
 import SignIn from "./components/signin/SignIn";
-import UserInfo from "./components/userinfo/UserInfo"; // Import the new component
+import UserInfo from "./components/userinfo/UserInfo";
 import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
