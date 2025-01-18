@@ -40,3 +40,15 @@
   .vote-button.selected {
     border: 3px solid black;
   }  
+
+  .vote-button.submit {
+    background-color: gray;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .vote-button.submit:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+  }
+  

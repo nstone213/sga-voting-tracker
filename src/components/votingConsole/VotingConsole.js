@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./VotingConsole.css";
 
 const VotingConsole = ({ user, votes, handleVote }) => {
+  const [selectedVote, setSelectedVote] = useState(null); // Local state to store the vote before submission
+
   if (!user?.uid || !votes[user.uid]) {
     return <p>Loading your vote...</p>;
   }
@@ -11,12 +13,20 @@ const VotingConsole = ({ user, votes, handleVote }) => {
       {["yay", "nay", "abstain"].map((option) => (
         <button
           key={option}
-          className={`vote-button ${option} ${votes[user.uid].vote === option ? "selected" : ""}`}
-          onClick={() => handleVote(user.uid, option)}
+          className={`vote-button ${option} ${selectedVote === option ? "selected" : ""}`}
+          onClick={() => setSelectedVote(option)} // Store the selection locally
         >
           {option.charAt(0).toUpperCase() + option.slice(1)}
         </button>
       ))}
+      
+      <button
+        className="vote-button submit"
+        onClick={() => handleVote(user.uid, selectedVote)}
+        disabled={!selectedVote} // Disable if no option is selected
+      >
+        Submit
+      </button>
     </div>
   );
 };
