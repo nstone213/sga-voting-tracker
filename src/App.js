@@ -161,24 +161,24 @@ function App() {
           <h2>Your Vote</h2>
           {user?.uid && votes[user.uid] ? (
             <div>
-              <button 
-                style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', margin: '5px', border: 'none', cursor: 'pointer' }}
-                onClick={() => handleVote(user.uid, "yay")}
-              >
-                Yay
-              </button>
-              <button 
-                style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', margin: '5px', border: 'none', cursor: 'pointer' }}
-                onClick={() => handleVote(user.uid, "nay")}
-              >
-                Nay
-              </button>
-              <button 
-                style={{ backgroundColor: 'yellow', color: 'black', padding: '10px 20px', margin: '5px', border: 'none', cursor: 'pointer' }}
-                onClick={() => handleVote(user.uid, "abstain")}
-              >
-                Abstain
-              </button>
+              {["yay", "nay", "abstain"].map((option) => (
+                <button
+                  key={option}
+                  style={{
+                    backgroundColor: voteColors[option],
+                    color: option === "abstain" ? "black" : "white",
+                    padding: "10px 20px",
+                    margin: "5px",
+                    border: votes[user.uid].vote === option ? "3px solid black" : "none",
+                    borderRadius: "10px", // Slightly rounded edges
+                    cursor: "pointer",
+                    fontSize: "16px"
+                  }}
+                  onClick={() => handleVote(user.uid, option)}
+                >
+                  {option.charAt(0).toUpperCase() + option.slice(1)}
+                </button>
+              ))}
             </div>
           ) : (
             <p>Loading your vote...</p>
@@ -225,16 +225,23 @@ function App() {
           </button>
 
           <h2>Voting Results</h2>
-          {Object.entries(votes).map(([uid, data]) => (
-            <div key={uid} style={{
-              width: '50px',
-              height: '50px',
-              backgroundColor: voteColors[data.vote || "none"],
-              margin: '10px',
-              display: 'inline-block',
-              borderRadius: '5px'
-            }} title={data.name}></div>
-          ))}
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "10px",
+            justifyContent: "center",
+            padding: "10px"
+          }}>
+            {Object.entries(votes).map(([uid, data]) => (
+              <div key={uid} style={{
+                width: '50px',
+                height: '50px',
+                backgroundColor: voteColors[data.vote || "none"],
+                display: 'inline-block',
+                borderRadius: '5px'
+              }} title={data.name}></div>
+            ))}
+          </div>
         </div>
       )}
     </div>
