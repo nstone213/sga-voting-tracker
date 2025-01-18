@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { 
-  signInAnonymously, 
-  onAuthStateChanged, 
-  signOut 
-} from "firebase/auth";
-import { 
-  doc, 
-  setDoc, 
-  getDoc, 
-  onSnapshot, 
-  collection, 
-  deleteDoc 
-} from "firebase/firestore";
+import { signInAnonymously, onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
 import "./App.css";
 import Loader from "./Loader";
 import Results from "./Results";
-import { auth, db } from "./firebaseConfig"; // Import Firebase config
+import { auth, db } from "./firebaseConfig";
 
 function App() {
   const [user, setUser] = useState(null);
