@@ -118,6 +118,24 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const handleUnload = async () => {
+      if (user) {
+        try {
+          await deleteDoc(doc(db, "users", user.uid));
+        } catch (error) {
+          console.error("Error deleting user data on unload:", error);
+        }
+      }
+    };
+  
+    window.addEventListener("beforeunload", handleUnload);
+  
+    return () => {
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, [user]);  
+
   // Map vote types to colors
   const voteColors = {
     yay: "green",
