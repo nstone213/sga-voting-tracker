@@ -4,6 +4,7 @@ import { doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from "firebase
 import "./App.css";
 import Loader from "./Loader";
 import Results from "./Results";
+import VotingConsole from "./VotingConsole"; // Import VotingConsole
 import { auth, db } from "./firebaseConfig";
 
 function App() {
@@ -120,23 +121,7 @@ function App() {
           </button>
         </div>
       ) : (
-        <div className="voting-container">
-          {user?.uid && votes[user.uid] ? (
-            <div className="vote-buttons">
-              {["yay", "nay", "abstain"].map((option) => (
-                <button
-                  key={option}
-                  className={`vote-button ${option} ${votes[user.uid].vote === option ? "selected" : ""}`}
-                  onClick={() => handleVote(user.uid, option)}
-                >
-                  {option.charAt(0).toUpperCase() + option.slice(1)}
-                </button>
-              ))}
-            </div>
-          ) : (
-            <p>Loading your vote...</p>
-          )}
-        </div>
+        <VotingConsole user={user} votes={votes} handleVote={handleVote} />
       )}
       {showResults && <Results votes={votes} setShowResults={setShowResults} />}
     </div>

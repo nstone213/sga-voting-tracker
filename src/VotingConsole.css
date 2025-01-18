@@ -1,0 +1,42 @@
+/* Voting container */
+.voting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+  }
+  
+  /* Vote buttons */
+  .vote-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .vote-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    border: none;
+  }
+  
+  .vote-button.yay {
+    background-color: green;
+  }
+  
+  .vote-button.nay {
+    background-color: red;
+  }
+  
+  .vote-button.abstain {
+    background-color: yellow;
+    color: black;
+  }
+  
+  .vote-button.selected {
+    border: 3px solid black;
+  }  
