@@ -5,7 +5,7 @@
   position: relative;
 }
 
-/* User name display */
+/* User name display 
 .user-name {
   position: absolute;
   top: 10px;
@@ -21,7 +21,7 @@
   color: rgb(74, 72, 72);
 }
 
-/* Results button styling */
+Results button styling 
 .results-button {
   position: absolute;
   top: 10px;
@@ -35,7 +35,6 @@
   font-size: 14px;
 }
 
-/* Sign out button */
 .sign-out-button {
   position: absolute;
   top: 10px;
@@ -48,6 +47,8 @@
   border-radius: 100px;
   font-size: 14px;
 }
+
+*/
 
 /* Login container */
 .login-container {
