@@ -46,18 +46,24 @@ function VoterInterface({ user }) {
   const [isVoteLocked, setIsVoteLocked] = useState(false);
 
   useEffect(() => {
+    if (!user?.uid) return;
+  
     const fetchVote = async () => {
-      const userVoteRef = doc(db, "votes", user.uid);
-      const userVoteSnap = await getDoc(userVoteRef);
-
-      if (userVoteSnap.exists()) {
-        setSelectedVote(userVoteSnap.data().vote);
-        setIsVoteLocked(true);
+      try {
+        const userVoteRef = doc(db, "votes", user.uid);
+        const userVoteSnap = await getDoc(userVoteRef);
+  
+        if (userVoteSnap.exists()) {
+          setSelectedVote(userVoteSnap.data().vote);
+          setIsVoteLocked(true);
+        }
+      } catch (error) {
+        console.error("Error fetching vote:", error);
       }
     };
-
+  
     fetchVote();
-  }, [user.uid]);
+  }, [user]); // Dependency changed from user.uid to user  
 
   const handleVote = (vote) => {
     if (!isVoteLocked) {
@@ -67,15 +73,13 @@ function VoterInterface({ user }) {
 
   const lockInVote = async () => {
     if (selectedVote && !isVoteLocked) {
-      await setDoc(doc(db, "votes", user.uid), {
-        userId: user.uid,
-        vote: selectedVote,
-      });
+      await setDoc(doc(db, "votes", user.uid), { userId: user.uid, vote: selectedVote });
       setIsVoteLocked(true);
+      setSelectedVote(selectedVote); // Force re-render
     } else {
       alert("Please select a vote before locking in!");
     }
-  };
+  };  
 
   return (
     <div className="voter-interface">
@@ -116,18 +120,20 @@ function Results() {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "votes"), (snapshot) => {
-      let voteCounts = { yay: 0, nay: 0, abstain: 0 };
+      const voteCounts = { yay: 0, nay: 0, abstain: 0 };
+  
       snapshot.forEach((doc) => {
         const vote = doc.data().vote;
-        if (voteCounts[vote] !== undefined) {
+        if (voteCounts.hasOwnProperty(vote)) {
           voteCounts[vote]++;
         }
       });
+  
       setVotes(voteCounts);
     });
-
+  
     return () => unsubscribe();
-  }, []);
+  }, []);  
 
   return (
     <div className="results-overlay">
@@ -147,22 +153,24 @@ function App() {
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
-    signInAnonymously(auth).then(() => console.log("Signed in anonymously"));
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+      } else {
+        // Only sign in anonymously if no user is detected
+        signInAnonymously(auth)
+          .then(({ user }) => setUser(user))
+          .catch((error) => console.error("Error signing in anonymously", error));
       }
     });
-
+  
     return () => unsubscribe();
-  }, []);
+  }, []);  
 
   const handleLogout = () => {
-    signOut(auth).then(() => {
-      setUser(null);
-      localStorage.removeItem("username");
-    });
-  };
+    localStorage.removeItem("username"); // Clear username but keep Firebase session
+    setUser(null);
+  };  
 
   return (
     <div className="app">
