@@ -5,6 +5,7 @@ import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browser
 import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from 'firebase/firestore';
 import "./App.css";
 import Loader from "./Loader";
+import Results from "./Results";
 
 // Firebase configuration (replace with your own Firebase config)
 const firebaseConfig = {
@@ -33,7 +34,7 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [votes, setVotes] = useState({});
   const [showResults, setShowResults] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Added loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -47,7 +48,7 @@ function App() {
       } else {
         setUser(null);
       }
-      setIsLoading(false); // Stop loading after authentication check
+      setIsLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -64,7 +65,7 @@ function App() {
         updatedVotes[doc.id] = doc.data();
       });
       setVotes(updatedVotes);
-      setIsLoading(false); // Stop loading after votes are fetched
+      setIsLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -80,7 +81,7 @@ function App() {
         name: name,
         uid: uid,
         vote: "none",
-        timestamp: new Date()
+        timestamp: new Date(),
       });
 
       setSubmitted(true);
@@ -108,7 +109,6 @@ function App() {
     }
   };
 
-  // Show loader if still loading
   if (isLoading) {
     return <Loader />;
   }
@@ -160,16 +160,7 @@ function App() {
           )}
         </div>
       )}
-      {showResults && (
-        <div className="results-modal">
-          <button onClick={() => setShowResults(false)} className="close-button">
-            ✖
-          </button>
-          {Object.entries(votes).map(([uid, data]) => (
-            <div key={uid} className={`vote-box ${data.vote}`} title={data.name}></div>
-          ))}
-        </div>
-      )}
+      {showResults && <Results votes={votes} setShowResults={setShowResults} />}
     </div>
   );
 }
