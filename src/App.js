@@ -30,6 +30,7 @@ function App() {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [checkboxes, setCheckboxes] = useState({}); // Store all users' checkboxes
+  const [showResults, setShowResults] = useState(false); // Toggle for results view
 
   useEffect(() => {
     // Listen for authentication state changes
@@ -52,8 +53,6 @@ function App() {
   useEffect(() => {
     // Listen for checkbox updates in Firestore
     const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
-      console.log("Firestore Snapshot Triggered"); // Debugging
-
       if (snapshot.empty) {
         console.warn("No documents found in Firestore.");
         setCheckboxes({});
@@ -66,7 +65,6 @@ function App() {
         updatedCheckboxes[doc.id] = data;
       });
 
-      console.log("Fetched checkboxes:", updatedCheckboxes); // Debugging
       setCheckboxes(updatedCheckboxes);
     });
 
@@ -79,8 +77,6 @@ function App() {
       const userCredential = await signInAnonymously(auth);
       const uid = userCredential.user.uid;
       setUser(userCredential.user);
-
-      console.log("User signed in:", { uid, name }); // Debugging
 
       // Store user data in Firestore with a default checkbox state
       await setDoc(doc(db, "users", uid), {
@@ -104,17 +100,39 @@ function App() {
     
     if (userDoc.exists()) {
       await setDoc(userDocRef, { checked: !userDoc.data().checked }, { merge: true });
-      console.log(`Checkbox for ${uid} updated to:`, !userDoc.data().checked); // Debugging
     }
   };
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px', position: 'relative' }}>
+      {/* Display user name in top left corner */}
       {submitted && name && (
         <div style={{ position: 'absolute', top: '10px', left: '10px', fontWeight: 'bold' }}>
           {name}
         </div>
       )}
+
+      {/* Results button in top right corner */}
+      {submitted && (
+        <button 
+          onClick={() => setShowResults(!showResults)}
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            padding: '8px 15px',
+            backgroundColor: 'black',
+            color: 'white',
+            border: 'none',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            fontSize: '14px'
+          }}
+        >
+          {showResults ? "Hide Results" : "Results"}
+        </button>
+      )}
+
       <h1>React + Firebase Anonymous Auth with Checkboxes</h1>
 
       {!submitted ? (
@@ -136,10 +154,10 @@ function App() {
           <p>User ID: {user?.uid}</p>
           <p>Anonymous: {user?.isAnonymous ? 'Yes' : 'No'}</p>
 
-          <h2>Users & Checkboxes</h2>
-          {Object.keys(checkboxes).length === 0 ? (
-            <p>No users found. Please refresh the page or check Firestore.</p>
-          ) : (
+          <h2>{showResults ? "All Users' Checkboxes" : "Your Checkbox"}</h2>
+
+          {showResults ? (
+            // Show all users' checkboxes when results are toggled on
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {Object.entries(checkboxes).map(([uid, data]) => (
                 <li key={uid} style={{ marginBottom: '10px' }}>
@@ -147,14 +165,29 @@ function App() {
                     <input
                       type="checkbox"
                       checked={data.checked || false}
-                      onChange={() => handleCheckboxChange(uid)}
-                      disabled={user?.uid !== uid} // Disable checkbox for other users
+                      disabled // Users cannot change others' checkboxes
                     />
                     {` ${data.name}`}
                   </label>
                 </li>
               ))}
             </ul>
+          ) : (
+            // Show only the logged-in user's checkbox
+            <div>
+              {user?.uid && checkboxes[user.uid] ? (
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={checkboxes[user.uid].checked || false}
+                    onChange={() => handleCheckboxChange(user.uid)}
+                  />
+                  {` ${name}`}
+                </label>
+              ) : (
+                <p>Loading your checkbox...</p>
+              )}
+            </div>
           )}
         </div>
       )}
