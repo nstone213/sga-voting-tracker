@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from 'firebase/firestore';
 import "./App.css";
+import Loader from "./Loader";
 
 // Firebase configuration (replace with your own Firebase config)
 const firebaseConfig = {
@@ -32,6 +33,7 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [votes, setVotes] = useState({});
   const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -45,6 +47,7 @@ function App() {
       } else {
         setUser(null);
       }
+      setIsLoading(false); // Stop loading after authentication check
     });
     return () => unsubscribe();
   }, []);
@@ -61,6 +64,7 @@ function App() {
         updatedVotes[doc.id] = doc.data();
       });
       setVotes(updatedVotes);
+      setIsLoading(false); // Stop loading after votes are fetched
     });
     return () => unsubscribe();
   }, []);
@@ -103,6 +107,11 @@ function App() {
       console.error("Error signing out:", error);
     }
   };
+
+  // Show loader if still loading
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="container">
