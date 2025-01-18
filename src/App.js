@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { signInAnonymously, onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
 import "./App.css";
-import Loader from "./Loader";
-import Results from "./Results";
-import VotingConsole from "./VotingConsole"; // Import VotingConsole
-import { auth, db } from "./firebaseConfig";
+import Loader from "./components/loader/Loader";
+import Results from "./components/results/Results";
+import VotingConsole from "./components/votingConsole/VotingConsole"; // Import VotingConsole
+import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
   const [user, setUser] = useState(null);
