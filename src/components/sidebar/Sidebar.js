@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import "./Sidebar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -18,3 +19,5 @@ const Sidebar = ({ handleSignOut, setShowResults }) => {
 };
 
 export default Sidebar;
+=======
+>>>>>>> parent of 09bb6b6 (Sidebar styling)
