@@ -15,6 +15,19 @@
   margin: auto; /* Centers horizontally */
 }
 
+.voting-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically */
+  width: 100%;
+}
+
+.voting-details p {
+  position: relative;
+  top: -80px; /* Adjust the value to move elements up */
+  font-size: 13px;
+}
+
 
 /* Vote buttons */
 .vote-buttons {

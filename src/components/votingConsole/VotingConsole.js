@@ -36,8 +36,10 @@ const VotingConsole = ({ user, votes, handleVote }) => {
         <FinalVotes votes={votes} /> {/* Render FinalVotes here */}
       </div>
       <div className="voting-container">
-        <p>Voting in progress...</p>
-        <p>xx:xx:xx</p>
+        <div className="voting-details">
+          <p>Voting in progress...</p>
+          <p>xx:xx:xx</p>
+        </div>
         <h2>BILL TBD</h2>
         <div className="vote-buttons">
           {["yay", "nay", "abstain"].map((option) => (
