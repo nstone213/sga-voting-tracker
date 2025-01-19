@@ -22,11 +22,10 @@
 
 .links-container a {
     text-decoration: none;
-    color: blue;
-    font-size: 18px;
-    font-weight: bold;
+    color: rgb(113, 113, 113);
+    font-size: 14px;
 }
 
 .links-container a:hover {
-    text-decoration: underline;
+    color: rgb(49, 123, 228);
 }
