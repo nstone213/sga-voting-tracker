@@ -3,19 +3,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Label */
-  .toggle-label {
-    font-size: 14px;
-    color: #333;
   }
   
   /* Toggle switch wrapper */
   .toggle-switch {
     width: 50px;
-    height: 25px;
+    height: 7px;
     border-radius: 15px;
     background-color: #ccc;
     position: relative;
@@ -25,23 +18,23 @@
   
   /* Active state */
   .toggle-switch.on {
-    background-color: #4caf50;
+    background-color: #060447;
   }
   
   /* Toggle knob */
   .toggle-knob {
     width: 20px;
     height: 20px;
-    background-color: white;
+    background-color: rgb(1, 2, 65);
     border-radius: 50%;
     position: absolute;
     top: 50%;
-    left: 3px;
+    left: 0px;
     transform: translateY(-50%);
     transition: left 0.3s ease-in-out;
   }
   
   /* Move knob when active */
   .toggle-switch.on .toggle-knob {
-    left: 27px;
+    left: 33px;
   }  

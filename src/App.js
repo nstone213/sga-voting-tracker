@@ -94,9 +94,7 @@ function App() {
       {showResults && <Results votes={votes} setShowResults={setShowResults} />}
       <Links/>
       <div style={{ padding: "20px" }}>
-        <h2>React Toggle Switch</h2>
-        <ToggleSwitch isOn={isOn} handleToggle={handleToggle} label="Enable Feature" />
-        <p>Toggle is {isOn ? "ON" : "OFF"}</p>
+        <ToggleSwitch isOn={isOn} handleToggle={handleToggle} />
       </div>
     </div>
   );
