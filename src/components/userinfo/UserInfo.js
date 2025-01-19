@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./UserInfo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Sidebar from '../sidebar/Sidebar';
+import Results from '../results/Results';
 
-const UserInfo = ({ name }) => {
+const UserInfo = ({ name, handleSignOut }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [showResults, setShowResults] = useState(false); // ✅ State for results modal
 
   return (
     <>
@@ -21,7 +23,15 @@ const UserInfo = ({ name }) => {
       </div>
 
       {/* Sidebar appears as an overlay */}
-      {isSidebarVisible && <Sidebar />}
+      {isSidebarVisible && (
+        <Sidebar 
+          handleSignOut={handleSignOut} 
+          setShowResults={setShowResults} // ✅ Pass the function
+        />
+      )}
+
+      {/* Show Results modal when needed */}
+      {showResults && <Results votes={{}} setShowResults={setShowResults} />}
     </>
   );
 };
