@@ -124,3 +124,26 @@
   pointer-events: none; /* Prevent clicks on background elements */
   filter: blur(3px); /* Optional: Adds a slight blur effect */
 }
+
+.password-container {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.password-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+  outline: none;
+}
+
+.password-input:focus {
+  border-color: #007bff;
+}
