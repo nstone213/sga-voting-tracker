@@ -1,58 +1,65 @@
 /* Voting container */
 .voting-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-  }
-  
-  /* Vote buttons */
-  .vote-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .vote-button {
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 100px;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    border: none;
-  }
-  
-  .vote-button.yay {
-    background-color: green;
-  }
-  
-  .vote-button.nay {
-    background-color: red;
-  }
-  
-  .vote-button.abstain {
-    background-color: yellow;
-    color: black;
-  }
-  
-  .vote-button.selected {
-    border: 3px solid black;
-  }  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
 
-  .vote-button.submit {
-    background-color: gray;
-    color: white;
-    margin-top: 10px;
-  }
-  
-  .vote-button.submit:disabled {
-    background-color: lightgray;
-    cursor: not-allowed;
-  }
-  
-  .vote-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }  
+/* Vote buttons */
+.vote-buttons {
+  display: flex;
+  justify-content: center; /* Centers buttons horizontally */
+  align-items: center; /* Centers buttons vertically */
+  gap: 15px; /* Space between buttons */
+  margin-bottom: 10px; /* Space between vote buttons and submit button */
+}
+
+.vote-button {
+  padding: 10px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  border: none;
+}
+
+.vote-button.yay {
+  background-color: green;
+}
+
+.vote-button.nay {
+  background-color: red;
+}
+
+.vote-button.abstain {
+  background-color: yellow;
+  color: black;
+}
+
+.vote-button.selected {
+  border: 3px solid black;
+}  
+
+/* Submit button should be centered under the vote buttons */
+.submit-container {
+  display: flex;
+  justify-content: center; /* Centers the submit button */
+  margin-top: 10px;
+}
+
+.vote-button.submit {
+  background-color: gray;
+  color: white;
+}
+
+.vote-button.submit:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+.vote-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
