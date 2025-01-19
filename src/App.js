@@ -8,6 +8,7 @@ import VotingConsole from "./components/votingConsole/VotingConsole";
 import SignIn from "./components/signin/SignIn";
 import UserInfo from "./components/userinfo/UserInfo";
 import Links from "./components/links/Links";
+import ToggleSwitch from "./components/toggleswitch/ToggleSwitch";
 import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
   const [votes, setVotes] = useState({});
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isOn, setIsOn] = useState(false);
+  const handleToggle = () => {
+    setIsOn((prev) => !prev);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -88,6 +93,11 @@ function App() {
       )}
       {showResults && <Results votes={votes} setShowResults={setShowResults} />}
       <Links/>
+      <div style={{ padding: "20px" }}>
+        <h2>React Toggle Switch</h2>
+        <ToggleSwitch isOn={isOn} handleToggle={handleToggle} label="Enable Feature" />
+        <p>Toggle is {isOn ? "ON" : "OFF"}</p>
+      </div>
     </div>
   );
 }
