@@ -31,6 +31,7 @@ const VotingConsole = ({ user, votes, handleVote }) => {
 
   return (
     <div className="voting-container">
+      <h2>BILL TBD</h2>
       <div className="vote-buttons">
         {["yay", "nay", "abstain"].map((option) => (
           <button
