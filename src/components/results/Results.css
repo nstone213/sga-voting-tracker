@@ -69,13 +69,43 @@
   position: absolute;
   bottom: 15px;
   right: 15px;
-  padding: 8px 12px;
-  font-size: 14px;
-  background-color: #007bff;
-  color: white;
+  padding: 0;
+  background: none;
   border: none;
-  border-radius: 5px;
+  outline: none;
+  font-size: 24px;
+  color: rgb(0, 0, 0);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Rotate the cog on hover */
+.settings-button:hover {
+  transform: rotate(30deg); /* Slight turn when hovered */
+}
+
+/* Continuous rotation on active (click) */
+.settings-button:active {
+  animation: spin 0.6s linear infinite;
+}
+
+/* Keyframes for smooth spinning effect */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Adjust icon size */
+.settings-button svg {
+  width: 24px;
+  height: 24px;
 }
 
 /* Overlay */
