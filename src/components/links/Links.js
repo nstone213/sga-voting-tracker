@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState }from "react";
 import "./Links.css";
+import ToggleSwitch from './toggleswitch/ToggleSwitch';
 
 const Links = () => {
+    const [isOn, setIsOn] = useState(false);
+    const handleToggle = () => {
+        setIsOn((prev) => !prev);
+    };
+
     return (
         <div className="links-container">
+            <div className='toggleswitch-container' style={{ padding: "20px" }}>
+                <ToggleSwitch isOn={isOn} handleToggle={handleToggle} />
+            </div>
             <ul>
                 <li>
                     <a href="https://github.com/nstone213" target="_blank" rel="noopener noreferrer">

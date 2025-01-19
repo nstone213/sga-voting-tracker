@@ -5,6 +5,13 @@
     width: 100%;
     display: flex;
     justify-content: center; /* Center the links horizontally */
+    background-color: rgb(255, 255, 255); /* Ensures a consistent background */
+}
+
+.toggleswitch-container {
+    position: fixed;
+    right: 93%;
+    bottom: 1%;
 }
 
 .links-container ul {

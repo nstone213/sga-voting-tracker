@@ -7,7 +7,6 @@ import VotingConsole from "./components/votingConsole/VotingConsole";
 import SignIn from "./components/signin/SignIn";
 import UserInfo from "./components/userinfo/UserInfo";
 import Links from "./components/links/Links";
-import ToggleSwitch from "./components/toggleswitch/ToggleSwitch";
 import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
@@ -16,10 +15,6 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [votes, setVotes] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isOn, setIsOn] = useState(false);
-  const handleToggle = () => {
-    setIsOn((prev) => !prev);
-  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -89,9 +84,6 @@ function App() {
         <VotingConsole user={user} votes={votes} handleVote={handleVote} />
       )}
       <Links/>
-      <div style={{ padding: "20px" }}>
-        <ToggleSwitch isOn={isOn} handleToggle={handleToggle} />
-      </div>
     </div>
   );
 }
