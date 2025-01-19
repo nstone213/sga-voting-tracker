@@ -20,7 +20,7 @@ const UserInfo = ({ name, user, handleSignOut, setShowResults }) => {
         </div>
         {/* Buttons grouped together on the right */}
         <div className="button-group">
-          <button onClick={() => setShowResults(true)} className="results-button">
+          <button className="results-button">
             Results <i className="fas fa-check-to-slot"></i>
           </button>
           <button onClick={handleSignOut} className="sign-out-button">

@@ -1,10 +1,12 @@
+
+
 /* Voting container */
 .voting-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 40vh;
   padding: 20px; /* Adds spacing inside the box */
   border-radius: 6px; /* Optional: rounded corners */
   background-color: rgb(246, 246, 246); /* Ensures a consistent background */

@@ -1,0 +1,61 @@
+/* Results modal */
+.results-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    padding: 20px; /* Adds spacing inside the box */
+    border-radius: 6px; /* Optional: rounded corners */
+    background-color: rgb(246, 246, 246); /* Ensures a consistent background */
+    width: 60%; /* Adjust width as needed */
+    max-width: 400px; /* Prevents excessive width on larger screens */
+    margin: auto; /* Centers horizontally */
+    margin-bottom: 20px;
+  }
+  
+  /* Close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Vote boxes container */
+  .votes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 30px; /* Added space between rows */
+    justify-content: center;
+  }
+  
+  /* Vote boxes */
+  .vote-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+  }
+  
+  .vote-box.yay {
+    background-color: green;
+  }
+  
+  .vote-box.nay {
+    background-color: red;
+  }
+  
+  .vote-box.abstain {
+    background-color: yellow;
+  }
+  
+  .vote-box.none {
+    background-color: gray;
+  }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./VotingConsole.css";
+import FinalVotes from "../finalvotes/FinalVotes"; // Import FinalVotes
 
 const VotingConsole = ({ user, votes, handleVote }) => {
   const [selectedVote, setSelectedVote] = useState(null); // Local state for selected vote
@@ -30,33 +31,38 @@ const VotingConsole = ({ user, votes, handleVote }) => {
   }
 
   return (
-    <div className="voting-container">
-      <p>Voting in progress...</p>
-      <p>xx:xx:xx</p>
-      <h2>BILL TBD</h2>
-      <div className="vote-buttons">
-        {["yay", "nay", "abstain"].map((option) => (
-          <button
-            key={option}
-            className={`vote-button ${option} ${selectedVote === option ? "selected" : ""}`}
-            onClick={() => !isSubmitted && setSelectedVote(option)} // Prevent changes if submitted
-            disabled={isSubmitted} // Disable after submission
-          >
-            {option.charAt(0).toUpperCase() + option.slice(1)}
-          </button>
-        ))}
+    <>
+      <div className="results-container">
+        <FinalVotes votes={votes} /> {/* Render FinalVotes here */}
       </div>
+      <div className="voting-container">
+        <p>Voting in progress...</p>
+        <p>xx:xx:xx</p>
+        <h2>BILL TBD</h2>
+        <div className="vote-buttons">
+          {["yay", "nay", "abstain"].map((option) => (
+            <button
+              key={option}
+              className={`vote-button ${option} ${selectedVote === option ? "selected" : ""}`}
+              onClick={() => !isSubmitted && setSelectedVote(option)} // Prevent changes if submitted
+              disabled={isSubmitted} // Disable after submission
+            >
+              {option.charAt(0).toUpperCase() + option.slice(1)}
+            </button>
+          ))}
+        </div>
 
-      <div className="submit-container">
-        <button
-          className="vote-button submit"
-          onClick={submitVote}
-          disabled={!selectedVote || isSubmitted} // Disable if no selection or already submitted
-        >
-          Submit
-        </button>
+        <div className="submit-container">
+          <button
+            className="vote-button submit"
+            onClick={submitVote}
+            disabled={!selectedVote || isSubmitted} // Disable if no selection or already submitted
+          >
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

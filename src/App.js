@@ -3,7 +3,6 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, onSnapshot, collection, deleteDoc, setDoc } from "firebase/firestore";
 import "./App.css";
 import Loader from "./components/loader/Loader";
-import Results from "./components/results/Results";
 import VotingConsole from "./components/votingConsole/VotingConsole";
 import SignIn from "./components/signin/SignIn";
 import UserInfo from "./components/userinfo/UserInfo";
@@ -16,7 +15,6 @@ function App() {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [votes, setVotes] = useState({});
-  const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isOn, setIsOn] = useState(false);
   const handleToggle = () => {
@@ -83,14 +81,13 @@ function App() {
   return (
     <div className="container">
       {submitted && (
-        <UserInfo name={name} user={user} handleSignOut={handleSignOut} setShowResults={setShowResults} />
+        <UserInfo name={name} user={user} handleSignOut={handleSignOut} />
       )}
       {!submitted ? (
         <SignIn setUser={setUser} setName={setName} setSubmitted={setSubmitted} />
       ) : (
         <VotingConsole user={user} votes={votes} handleVote={handleVote} />
       )}
-      {showResults && <Results votes={votes} setShowResults={setShowResults} />}
       <Links/>
       <div style={{ padding: "20px" }}>
         <ToggleSwitch isOn={isOn} handleToggle={handleToggle} />
