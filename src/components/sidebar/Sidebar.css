@@ -14,3 +14,22 @@
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
+
+.results-button, 
+.sign-out-button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 100px;
+  font-size: 14px;
+}
+
+.results-button {
+  background-color: black;
+  color: white;
+}
+
+.sign-out-button {
+  background-color: rgb(99, 99, 99);
+  color: white;
+}
