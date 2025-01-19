@@ -77,3 +77,20 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Ensure it's behind the modal but above other elements */
+}
+
+/* Disable interactions with background content */
+.modal-open {
+  pointer-events: none; /* Prevent clicks on background elements */
+  filter: blur(3px); /* Optional: Adds a slight blur effect */
+}
