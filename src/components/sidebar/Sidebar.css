@@ -1,0 +1,16 @@
+.sidebar {
+    position: fixed; /* Ensures it stays in place */
+    top: 0; /* Align with the top */
+    right: 0; /* Sidebar appears on the right */
+    width: 400px; /* Big square */
+    height: 816px; /* Big square */
+    background-color: #f0f0f0;
+    color: white;
+    padding: 20px;
+    z-index: 9999; /* Ensures it's above everything */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
