@@ -5,7 +5,14 @@
   align-items: center;
   justify-content: center;
   height: 50vh;
+  padding: 20px; /* Adds spacing inside the box */
+  border-radius: 6px; /* Optional: rounded corners */
+  background-color: rgb(246, 246, 246); /* Ensures a consistent background */
+  width: 60%; /* Adjust width as needed */
+  max-width: 400px; /* Prevents excessive width on larger screens */
+  margin: auto; /* Centers horizontally */
 }
+
 
 /* Vote buttons */
 .vote-buttons {

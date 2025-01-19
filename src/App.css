@@ -9,3 +9,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+body {
+  padding-top: 80px; /* Adjust this to match the height of .user-info */
+}

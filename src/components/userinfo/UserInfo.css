@@ -1,14 +1,15 @@
 .user-info {
-  position: absolute;
-  top: -50px;
-  left: 0px;
-  right: 0px;
+  position: fixed; /* Ensures it stays in place even when scrolling */
+  top: 0; /* Sticks to the top of the page */
+  left: 0;
+  right: 0;
   background-color: rgb(195, 203, 219);
   padding: 27px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Keeps left and right elements aligned */
-  position: relative;
+  justify-content: space-between; /* Keeps elements aligned */
+  z-index: 1000; /* Ensures it stays above other content */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
 }
 
 /* User name stays left-aligned */
