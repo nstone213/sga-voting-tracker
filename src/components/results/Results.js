@@ -7,9 +7,12 @@ const Results = ({ votes, setShowResults }) => {
       <button onClick={() => setShowResults(false)} className="close-button">
         ✖
       </button>
-      {Object.entries(votes).map(([uid, data]) => (
-        <div key={uid} className={`vote-box ${data.vote}`} title={data.name}></div>
-      ))}
+      <div className="votes-container">
+        {Object.entries(votes).map(([uid, data]) => (
+          <div key={uid} className={`vote-box ${data.vote}`} title={data.name}></div>
+        ))}
+      </div>
+      <button className="settings-button">Settings</button>
     </div>
   );
 };
