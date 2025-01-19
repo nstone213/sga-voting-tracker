@@ -7,6 +7,7 @@ import Results from "./components/results/Results";
 import VotingConsole from "./components/votingConsole/VotingConsole";
 import SignIn from "./components/signin/SignIn";
 import UserInfo from "./components/userinfo/UserInfo";
+import Links from "./components/links/Links";
 import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
         <VotingConsole user={user} votes={votes} handleVote={handleVote} />
       )}
       {showResults && <Results votes={votes} setShowResults={setShowResults} />}
+      <Links/>
     </div>
   );
 }

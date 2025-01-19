@@ -1,0 +1,32 @@
+.links-container {
+    position: fixed;
+    bottom: 20px;  /* Adjust this value if needed */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the links horizontally */
+}
+
+.links-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;  /* Adjust this value based on your preference */
+}
+
+.links-container li {
+    margin: 0; /* No extra margin needed since space-evenly handles spacing */
+}
+
+.links-container a {
+    text-decoration: none;
+    color: blue;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.links-container a:hover {
+    text-decoration: underline;
+}

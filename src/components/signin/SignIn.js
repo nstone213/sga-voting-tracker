@@ -6,6 +6,7 @@ import "./SignIn.css"; // Optional CSS for styling
 
 const SignIn = ({ setUser, setName, setSubmitted }) => {
   const [inputName, setInputName] = useState("");
+  const [inputUsername, setInputUsername] = useState("");
 
   const handleLogin = async () => {
     if (!inputName.trim()) return;
@@ -34,7 +35,13 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
         type="text"
         value={inputName}
         onChange={(e) => setInputName(e.target.value)}
-        placeholder="Your name"
+        placeholder="last name, first name"
+      />
+      <input
+        type="text"
+        value={inputUsername}
+        onChange={(e) => setInputUsername(e.target.value)}
+        placeholder="GT username"
       />
       <button onClick={handleLogin} disabled={!inputName.trim()}>
         Submit
