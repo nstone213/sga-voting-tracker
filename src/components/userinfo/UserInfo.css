@@ -1,40 +1,40 @@
+.user-info {
+  position: absolute;
+  top: -50px;
+  left: 0px;
+  right: 0px;
+  background-color: rgb(195, 203, 219);
+  padding: 27px;
+  display: flex;
+  align-items: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Ensures content is flush left */
+}
+
 .user-name {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-weight: bold;
-  }
-  
-  .user-id {
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    font-size: smaller;
-    color: rgb(74, 72, 72);
-  }
+  font-weight: bold;
+  color: rgb(27, 24, 32);
+}
 
-  .results-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 8px 15px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 100px;
-    font-size: 14px;
-  }
+.results-button, 
+.sign-out-button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 100px;
+  font-size: 14px;
+}
 
-  .sign-out-button {
-    position: absolute;
-    top: 10px;
-    right: 70px;
-    padding: 8px 15px;
-    background-color: darkgray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 100px;
-    font-size: 14px;
-  }
+.results-button {
+  background-color: black;
+  color: white;
+}
+
+.sign-out-button {
+  background-color: rgb(99, 99, 99);
+  color: white;
+}

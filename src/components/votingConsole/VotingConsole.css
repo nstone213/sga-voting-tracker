@@ -26,20 +26,22 @@
 }
 
 .vote-button.yay {
-  background-color: green;
+  background-color: rgb(119, 216, 119);
+  color: black;
 }
 
 .vote-button.nay {
-  background-color: red;
+  background-color: rgb(214, 75, 75);
+  color: black;
 }
 
 .vote-button.abstain {
-  background-color: yellow;
+  background-color: rgb(242, 242, 69);
   color: black;
 }
 
 .vote-button.selected {
-  border: 3px solid black;
+  border: 1px solid black;
 }  
 
 /* Submit button should be centered under the vote buttons */
@@ -50,7 +52,7 @@
 }
 
 .vote-button.submit {
-  background-color: gray;
+  background-color: rgb(118, 137, 176);
   color: white;
 }
 

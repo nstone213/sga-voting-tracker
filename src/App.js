@@ -82,7 +82,6 @@ function App() {
 
   return (
     <div className="container">
-      <h1>UHR Voting System</h1>
       {submitted && (
         <UserInfo name={name} user={user} handleSignOut={handleSignOut} setShowResults={setShowResults} />
       )}
