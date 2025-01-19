@@ -7,21 +7,42 @@
   padding: 27px;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Keeps left and right elements aligned */
+  position: relative;
 }
 
+/* User name stays left-aligned */
 .user-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Ensures content is flush left */
+  align-items: flex-start;
 }
 
-.user-name {
-  font-weight: bold;
-  color: rgb(27, 24, 32);
+/* Center the title absolutely within the user-info container */
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
-.results-button, 
-.sign-out-button {
+.title h2 {
+  font-family: "sans-serif", sans-serif; /* Change "Arial" to any other font */
+  font-size: 24px; /* Adjust size */
+  font-weight: 525; /* Adjust weight */
+  color: #333; /* Adjust color */
+}
+
+/* Buttons are aligned to the right */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Individual button styles */
+.results-button,
+.sign-out-button,
+.menu-button {
   padding: 10px 15px;
   border: none;
   cursor: pointer;
@@ -29,12 +50,22 @@
   font-size: 14px;
 }
 
+/* Now you can adjust pixel spacing for individual buttons */
 .results-button {
   background-color: black;
   color: white;
+  margin-right: 15px; /* Adjust as needed */
 }
 
 .sign-out-button {
   background-color: rgb(99, 99, 99);
   color: white;
+  margin-right: 10px; /* Adjust as needed */
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
