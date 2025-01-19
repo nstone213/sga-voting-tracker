@@ -1,0 +1,78 @@
+/* SignIn.css */
+
+/* Container styling */
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    height: 60vh;            /* Full viewport height */
+    width: 100%;
+  }  
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Prevents container from stretching too wide */
+    width: 100%;
+  }
+  
+  /* Text styling */
+  p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Input field styling */
+  input {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+  }
+  
+  /* Submit button styling */
+  .loginsubmit {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+  }
+  
+  .loginsubmit:disabled {
+    background-color: #a0c4ff;
+    cursor: not-allowed;
+  }
+  
+  .loginsubmit:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .loginsubmit:active:not(:disabled) {
+    transform: scale(0.98); /* Slight press effect */
+  }

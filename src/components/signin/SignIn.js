@@ -29,25 +29,27 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
   };
 
   return (
-    <div className="login-container">
-      <p>Enter your name to continue:</p>
-      <input
-        type="text"
-        value={inputName}
-        onChange={(e) => setInputName(e.target.value)}
-        placeholder="last name, first name"
-      />
-      <input
-        type="text"
-        value={inputUsername}
-        onChange={(e) => setInputUsername(e.target.value)}
-        placeholder="GT username"
-      />
-      <button onClick={handleLogin} disabled={!inputName.trim()}>
-        Submit
-      </button>
+    <div className="login-wrapper">
+      <div className="login-container">
+        <p>Enter your name to continue:</p>
+        <input
+          type="text"
+          value={inputName}
+          onChange={(e) => setInputName(e.target.value)}
+          placeholder="last name, first name"
+        />
+        <input
+          type="text"
+          value={inputUsername}
+          onChange={(e) => setInputUsername(e.target.value)}
+          placeholder="GT username"
+        />
+        <button className="loginsubmit" onClick={handleLogin} disabled={!inputName.trim()}>
+          Submit
+        </button>
+      </div>
     </div>
-  );
+  );  
 };
 
 export default SignIn;
