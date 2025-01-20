@@ -1,52 +1,73 @@
+/* Parent container for layout */
+.voting-console {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligns items at the top */
+  gap: 20px; /* Adds space between RollCall and the other sections */
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* RollCall section (left side) */
+.roll-call {
+  flex: 1;
+  max-width: 250px; /* Adjust width as needed */
+}
+
+/* Container for FinalVotes and Voting box */
+.voting-section {
+  display: flex;
+  flex-direction: column;
+  flex: 2; /* Takes up twice as much space as RollCall */
+}
+
 /* Voting container */
 .voting-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align items at the top */
+  justify-content: flex-start;
   height: 40vh;
   padding: 20px;
   border-radius: 6px;
   background-color: rgb(246, 246, 246);
-  width: 60%;
+  width: 100%;
   max-width: 400px;
   margin: auto;
-  position: relative; /* Ensure containment */
+  position: relative;
 }
 
 h2 {
-  margin-top: 10px; /* Adjust instead of negative margins */
-  text-align: center; /* Keep it centered */
-  width: 100%; /* Make sure it doesn’t overflow */
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
 }
 
+/* Voting details */
 .voting-details {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Align text to the top */
+  justify-content: space-between;
   width: 100%;
-  margin-bottom: 40px; /* Ensure space between elements */
+  margin-bottom: 40px;
 }
 
-.voting-details p {
-  font-size: 13px;
-  margin: 2px 0; /* Add a small margin for spacing */
-}
-
-/* Submit button should be the same width as all vote buttons combined */
+/* Submit button styling */
 .submit-container {
   display: flex;
-  justify-content: center; /* Centers the submit button */
+  justify-content: center;
   margin-top: 10px;
   width: 100%;
 }
 
 .vote-button.submit {
   height: 40px;
-  width: calc(80px * 3 + 20px); /* Same width as three vote buttons + gaps */
+  width: calc(80px * 3 + 20px);
   background-color: rgb(118, 137, 176);
   color: white;
-  padding: 12px 0; /* Adjust padding for a button-like feel */
+  padding: 12px 0;
   font-size: 18px;
   border-radius: 100px;
   text-align: center;

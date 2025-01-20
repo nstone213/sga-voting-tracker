@@ -31,36 +31,38 @@ const VotingConsole = ({ user, votes, handleVote }) => {
   }
 
   return (
-    <>
+    <div className="voting-console">
       <RollCall />
-      <div className="results-container">
-        <FinalVotes votes={votes} />
-      </div>
-      <div className="voting-container">
-        <div className="voting-details">
-          <p>Voting in progress...</p>
-          <p>xx:xx:xx</p>
+      <div className="voting-section">
+        <div className="results-container">
+          <FinalVotes votes={votes} />
         </div>
-        <h2 className="bill-title">BILL TBD</h2>
-
-        <VoteButtons
-          selectedVote={selectedVote}
-          setSelectedVote={setSelectedVote}
-          isSubmitted={isSubmitted}
-        />
-
-        <div className="submit-container">
-          <button
-            className="vote-button submit"
-            onClick={submitVote}
-            disabled={!selectedVote || isSubmitted}
-          >
-            Submit
-          </button>
+        <div className="voting-container">
+          <div className="voting-details">
+            <p>Voting in progress...</p>
+            <p>xx:xx:xx</p>
+          </div>
+          <h2 className="bill-title">BILL TBD</h2>
+  
+          <VoteButtons
+            selectedVote={selectedVote}
+            setSelectedVote={setSelectedVote}
+            isSubmitted={isSubmitted}
+          />
+  
+          <div className="submit-container">
+            <button
+              className="vote-button submit"
+              onClick={submitVote}
+              disabled={!selectedVote || isSubmitted}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
-    </>
-  );
+    </div>
+  );  
 };
 
 export default VotingConsole;
