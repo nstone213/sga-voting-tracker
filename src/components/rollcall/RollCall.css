@@ -1,18 +1,44 @@
 .rollcall-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 20vh;
-        padding: 20px; /* Adds spacing inside the box */
-        border-radius: 6px; /* Optional: rounded corners */
-        background-color: rgb(246, 246, 246); /* Ensures a consistent background */
-        width: 60%; /* Adjust width as needed */
-        max-width: 400px; /* Prevents excessive width on larger screens */
-        margin: auto; /* Centers horizontally */
-        margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    padding: 20px; /* Adds spacing inside the box */
+    border-radius: 6px; /* Optional: rounded corners */
+    background-color: rgb(246, 246, 246); /* Ensures a consistent background */
+    width: 60%; /* Adjust width as needed */
+    max-width: 400px; /* Prevents excessive width on larger screens */
+    margin: auto; /* Centers horizontally */
+    margin-bottom: 20px;
   }
   
+  /* Header layout for title and button */
+  .rollcall-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Moves "Roll Call" left and button right */
+    align-items: center;
+    margin-bottom: 10px; /* Adds spacing between title and the list */
+  }
+  
+  /* Styles "Roll Call" title */
+  .rollcall-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Button styling */
+  .information-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333; /* Adjust color if needed */
+  }
+  
+  /* List styles */
   .rollcall-container ul {
     list-style: none;
     padding: 0;
@@ -26,6 +52,7 @@
     transition: background-color 0.3s ease;
   }
   
+  /* Highlight active users */
   .active-user {
     color: rgba(15, 186, 129, 255);
     font-weight: bold;

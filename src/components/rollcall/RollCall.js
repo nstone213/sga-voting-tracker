@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseconfig/firebaseConfig";
 import "./RollCall.css"; // Ensure you create a corresponding CSS file for styling
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const RollCall = () => {
   const [loggedInUsers, setLoggedInUsers] = useState([]);
@@ -25,7 +26,13 @@ const RollCall = () => {
 
   return (
     <div className="rollcall-container">
-      <p>Roll Call</p>
+      <div className="rollcall-header">
+        <p className="rollcall-title">Roll Call</p>
+        <button className="information-button">
+          <i className="fas fa-circle-info"></i>
+        </button>
+      </div>
+
       <ul>
         {predefinedNames.map((name) => (
           <li key={name} className={loggedInUsers.includes(name) ? "active-user" : ""}>

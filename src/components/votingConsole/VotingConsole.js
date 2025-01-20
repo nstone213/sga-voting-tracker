@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./VotingConsole.css";
-import FinalVotes from "../finalvotes/FinalVotes"; // Import FinalVotes
+import FinalVotes from "../finalvotes/FinalVotes";
 import RollCall from "../rollcall/RollCall";
+import VoteButtons from "../votebuttons/VoteButtons"; // Import the new component
 
 const VotingConsole = ({ user, votes, handleVote }) => {
-  const [selectedVote, setSelectedVote] = useState(null); // Local state for selected vote
-  const [isSubmitted, setIsSubmitted] = useState(false); // Lock-in state
+  const [selectedVote, setSelectedVote] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Load vote state from localStorage
   useEffect(() => {
     const savedVote = localStorage.getItem(`vote-${user?.uid}`);
     if (savedVote) {
@@ -20,7 +20,6 @@ const VotingConsole = ({ user, votes, handleVote }) => {
   const submitVote = () => {
     handleVote(user.uid, selectedVote);
     setIsSubmitted(true);
-    // Save vote state to localStorage
     localStorage.setItem(
       `vote-${user.uid}`,
       JSON.stringify({ vote: selectedVote, submitted: true })
@@ -33,29 +32,22 @@ const VotingConsole = ({ user, votes, handleVote }) => {
 
   return (
     <>
-      <RollCall/>
+      <RollCall />
       <div className="results-container">
-        <FinalVotes votes={votes} /> {/* Render FinalVotes here */}
+        <FinalVotes votes={votes} />
       </div>
       <div className="voting-container">
         <div className="voting-details">
           <p>Voting in progress...</p>
           <p>xx:xx:xx</p>
         </div>
-        <h2 className="bill-title">BILL TBD</h2> {/* Apply new class if needed */}
+        <h2 className="bill-title">BILL TBD</h2>
 
-        <div className="vote-buttons">
-          {["yay", "nay", "abstain"].map((option) => (
-            <button
-              key={option}
-              className={`vote-button ${option} ${selectedVote === option ? "selected" : ""}`}
-              onClick={() => !isSubmitted && setSelectedVote(option)}
-              disabled={isSubmitted}
-            >
-              {option.charAt(0).toUpperCase() + option.slice(1)}
-            </button>
-          ))}
-        </div>
+        <VoteButtons
+          selectedVote={selectedVote}
+          setSelectedVote={setSelectedVote}
+          isSubmitted={isSubmitted}
+        />
 
         <div className="submit-container">
           <button
