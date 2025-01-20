@@ -7,9 +7,20 @@ import "./SignIn.css"; // Optional CSS for styling
 const SignIn = ({ setUser, setName, setSubmitted }) => {
   const [inputName, setInputName] = useState("");
   const [inputUsername, setInputUsername] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+
+  // Function to validate name format (Last, First)
+  const isValidNameFormat = (name) => {
+    return /^[A-Za-z]+, [A-Za-z]+$/.test(name.trim()); // Matches "Last, First"
+  };
 
   const handleLogin = async () => {
-    if (!inputName.trim()) return;
+    if (!isValidNameFormat(inputName)) {
+      setErrorMessage("Name must be in Last Name, First Name format");
+      setTimeout(() => setErrorMessage(""), 3000); // Hide error after 3 seconds
+      return;
+    }
+
     try {
       const userCredential = await signInAnonymously(auth);
       const uid = userCredential.user.uid;
@@ -19,6 +30,7 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
 
       await setDoc(doc(db, "users", uid), {
         name: inputName,
+        username: inputUsername, // Store GT username as well
         uid: uid,
         vote: "none",
         timestamp: new Date(),
@@ -31,12 +43,12 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
   return (
     <div className="login-wrapper">
       <div className="login-container">
-        <p>Enter your name to continue:</p>
+        <p>Login to continue:</p>
         <input
           type="text"
           value={inputName}
           onChange={(e) => setInputName(e.target.value)}
-          placeholder="last name, first name"
+          placeholder="Last name, First name"
         />
         <input
           type="text"
@@ -44,9 +56,14 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
           onChange={(e) => setInputUsername(e.target.value)}
           placeholder="GT username"
         />
-        <button className="loginsubmit" onClick={handleLogin} disabled={!inputName.trim()}>
+        <button 
+          className="loginsubmit" 
+          onClick={handleLogin}
+          disabled={!inputName.trim() || !inputUsername.trim()} // Disabled until both fields are filled
+        >
           Submit
         </button>
+        {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
       </div>
     </div>
   );  

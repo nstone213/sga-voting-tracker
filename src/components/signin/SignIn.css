@@ -76,3 +76,13 @@
   .loginsubmit:active:not(:disabled) {
     transform: scale(0.98); /* Slight press effect */
   }
+
+  /* Error message styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  animation: fadeOut 3s ease-in-out forwards;
+}

@@ -77,6 +77,7 @@ h2 {
 
 .vote-button.abstain {
   background-color: rgb(242, 242, 69);
+  color: rgba(255,255,255,0.9);
 }
 
 .vote-button.abstain:hover {
