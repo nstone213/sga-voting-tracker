@@ -3,6 +3,7 @@ import { signInAnonymously } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseconfig/firebaseConfig";
 import "./SignIn.css"; // Optional CSS for styling
+import sgalogo from "../assets/sgalogo.png"; // Ensure the correct path to your image
 
 const SignIn = ({ setUser, setName, setSubmitted }) => {
   const [inputName, setInputName] = useState("");
@@ -45,6 +46,12 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
   return (
     <div className="login-wrapper">
       <div className="login-container">
+        <div className="title-signin">
+          <img src={sgalogo} alt="SGA Logo" className="sgalogo-signin" />
+          <h2>
+            Centralized Voting
+          </h2>
+        </div>
         <p>Login to continue:</p>
         <form onSubmit={handleLogin}> {/* Form element added */}
           <input

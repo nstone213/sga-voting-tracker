@@ -86,3 +86,24 @@
   font-weight: bold;
   animation: fadeOut 3s ease-in-out forwards;
 }
+
+.title-signin {
+  display: flex;
+  align-items: center; /* Aligns items vertically */
+  justify-content: center; /* Centers items horizontally */
+  gap: 0px; /* Adds spacing between the logo and text */
+}
+
+.sgalogo-signin {
+  max-width: 50px; /* Adjust logo size as needed */
+  height: auto;
+  max-width: 100px;
+}
+
+.title-signin h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0; /* Removes default margin */
+  white-space: nowrap; /* Prevents text from wrapping */
+}
