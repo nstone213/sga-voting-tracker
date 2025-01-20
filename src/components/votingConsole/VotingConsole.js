@@ -38,12 +38,6 @@ const VotingConsole = ({ user, votes, handleVote }) => {
           <FinalVotes votes={votes} />
         </div>
         <div className="voting-container">
-          <div className="voting-details">
-            <p>Voting in progress...</p>
-            <p>xx:xx:xx</p>
-          </div>
-          <h2 className="bill-title">BILL TBD</h2>
-  
           <VoteButtons
             selectedVote={selectedVote}
             setSelectedVote={setSelectedVote}

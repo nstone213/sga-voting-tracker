@@ -57,4 +57,16 @@
   .vote-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }  
+  }
+  
+  .voting-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .voting-details p {
+    font-size: 12px;
+  }

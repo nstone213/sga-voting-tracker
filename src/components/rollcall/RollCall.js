@@ -48,7 +48,7 @@ const RollCall = () => {
       {/* Fixed footer in the bottom right */}
       <div className="rollcall-footer">
         <p>Quorum: --</p>
-        <p>Total Members: --</p>
+        <p>Members Logged: --</p>
       </div>
     </div>
   );

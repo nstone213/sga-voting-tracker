@@ -45,15 +45,6 @@ h2 {
   width: 100%;
 }
 
-/* Voting details */
-.voting-details {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 40px;
-}
-
 /* Submit button styling */
 .submit-container {
   display: flex;
