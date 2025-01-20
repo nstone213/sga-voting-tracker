@@ -25,7 +25,7 @@ const RollCall = () => {
 
   return (
     <div className="rollcall-container">
-      <h2>Roll Call</h2>
+      <p>Roll Call</p>
       <ul>
         {predefinedNames.map((name) => (
           <li key={name} className={loggedInUsers.includes(name) ? "active-user" : ""}>

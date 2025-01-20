@@ -1,6 +1,16 @@
 .rollcall-container {
-    text-align: center;
-    margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 20vh;
+        padding: 20px; /* Adds spacing inside the box */
+        border-radius: 6px; /* Optional: rounded corners */
+        background-color: rgb(246, 246, 246); /* Ensures a consistent background */
+        width: 60%; /* Adjust width as needed */
+        max-width: 400px; /* Prevents excessive width on larger screens */
+        margin: auto; /* Centers horizontally */
+        margin-bottom: 20px;
   }
   
   .rollcall-container ul {
@@ -17,7 +27,6 @@
   }
   
   .active-user {
-    color: white;
-    background-color: green;
+    color: rgb(84, 211, 108);
     font-weight: bold;
   }  
