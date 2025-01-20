@@ -7,13 +7,12 @@ const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup }) => {
 
   const handleBackdropClick = () => {
     setIsClosing(true); // Start closing animation
-  
+
     setTimeout(() => {
-      closeSidebar(); // Hide sidebar after animation completes
-      setIsClosing(false); // Reset state after animation
-    }, 300); // Ensure this matches the transition duration in CSS
+      setIsClosing(false); // Reset closing state
+      closeSidebar(); // Actually hide the sidebar and backdrop
+    }, 300); // Match the CSS transition duration
   };
-  
 
   return (
     <>
@@ -21,7 +20,7 @@ const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup }) => {
       <div
         className={`sidebar-backdrop ${
           isSidebarVisible || isClosing ? "visible" : ""
-        }`}
+        } ${isClosing ? "closing" : ""}`}
         onClick={handleBackdropClick}
       ></div>
 
@@ -34,7 +33,6 @@ const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup }) => {
         <button className="speaker-settings-button" onClick={openPopup}>
           Speaker Settings
         </button>
-        <p>HELLOOOOO</p>
       </div>
     </>
   );
