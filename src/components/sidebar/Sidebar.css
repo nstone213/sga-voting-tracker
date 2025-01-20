@@ -2,33 +2,34 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -250px; /* Initially off-screen */
+  right: -250px; /* Start off-screen */
   width: 250px;
   height: 100vh;
   background-color: #e5dbdb;
   color: black;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  transition: right 0.3s ease, opacity 0.3s ease;
-  z-index: 1001; /* Above backdrop */
-  opacity: 0; /* Fully transparent */
-  visibility: hidden; /* Not visible initially */
+  transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition */
+  z-index: 1001;
+  opacity: 0; /* Start invisible */
+  visibility: hidden; /* Hide initially */
   border-radius: 6px;
 }
 
-/* Sidebar slides into view */
+/* Sidebar slides in */
 .sidebar.visible {
-  right: 0; /* Slide in */
+  right: 0; /* Slide into view */
   opacity: 1;
   visibility: visible;
 }
 
-/* Sidebar sliding out */
+/* Sidebar slides out smoothly */
 .sidebar.closing {
-  right: -250px; /* Slide out */
+  right: -250px; /* Move back off-screen */
   opacity: 0; /* Fade out */
-  visibility: hidden; /* Fully hidden */
+  /* Remove visibility: hidden */
 }
+
 
 /* Backdrop */
 .sidebar-backdrop {
@@ -37,24 +38,15 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(132, 143, 201, 0.5); /* Semi-transparent overlay */
-  z-index: 1000; /* Below sidebar */
-  opacity: 0; /* Fully transparent */
-  visibility: hidden; /* Not visible initially */
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  background: rgba(132, 143, 201, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
 }
 
 /* Backdrop becomes visible */
 .sidebar-backdrop.visible {
-  opacity: 1; /* Fade in */
+  opacity: 1;
   visibility: visible;
-}
-
-/* Speaker settings button */
-.speaker-settings-button {
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 100px;
-  font-size: 14px;
 }
