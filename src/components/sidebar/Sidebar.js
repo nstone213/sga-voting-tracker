@@ -2,11 +2,20 @@ import React from "react";
 import "./Sidebar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarVisible, closeSidebar }) => {
   return (
-    <div className="sidebar">
-      <p>HELLOOOOO</p>
-    </div>
+    <>
+      {/* Backdrop: Only visible when sidebar is open */}
+      <div
+        className={`sidebar-backdrop ${isSidebarVisible ? "visible" : ""}`}
+        onClick={closeSidebar} /* Close when clicking outside */
+      ></div>
+
+      {/* Sidebar */}
+      <div className={`sidebar ${isSidebarVisible ? "visible" : ""}`}>
+        <p>HELLOOOOO</p>
+      </div>
+    </>
   );
 };
 

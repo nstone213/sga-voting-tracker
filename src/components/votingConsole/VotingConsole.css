@@ -28,12 +28,10 @@ h2 {
   margin-bottom: 70px; /* Ensure space between elements */
 }
 
-
 .voting-details p {
   font-size: 13px;
   margin: 2px 0; /* Add a small margin for spacing */
 }
-
 
 /* Vote buttons */
 .vote-buttons {
