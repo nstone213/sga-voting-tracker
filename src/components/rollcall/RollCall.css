@@ -1,0 +1,23 @@
+.rollcall-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .rollcall-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .rollcall-container li {
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .active-user {
+    color: white;
+    background-color: green;
+    font-weight: bold;
+  }  

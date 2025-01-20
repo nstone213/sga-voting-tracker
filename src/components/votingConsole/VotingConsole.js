@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./VotingConsole.css";
 import FinalVotes from "../finalvotes/FinalVotes"; // Import FinalVotes
+import RollCall from "../rollcall/RollCall";
 
 const VotingConsole = ({ user, votes, handleVote }) => {
   const [selectedVote, setSelectedVote] = useState(null); // Local state for selected vote
@@ -32,6 +33,7 @@ const VotingConsole = ({ user, votes, handleVote }) => {
 
   return (
     <>
+      <RollCall/>
       <div className="results-container">
         <FinalVotes votes={votes} /> {/* Render FinalVotes here */}
       </div>
