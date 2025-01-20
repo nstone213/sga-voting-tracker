@@ -7,7 +7,7 @@ const RollCall = () => {
   const [loggedInUsers, setLoggedInUsers] = useState([]);
 
   // Predefined list of names to check against
-  const predefinedNames = ["as, aS", "Bob Smith", "Charlie Lee", "Dana White"];
+  const predefinedNames = ["as, aS", "DeBord, Wyatt", "Charlie Lee", "Dana White"];
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
