@@ -43,3 +43,10 @@
     visibility: visible;
   }
   
+  .speaker-settings-button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    font-size: 14px;
+  }

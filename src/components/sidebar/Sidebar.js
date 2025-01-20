@@ -2,7 +2,7 @@ import React from "react";
 import "./Sidebar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const Sidebar = ({ isSidebarVisible, closeSidebar }) => {
+const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup }) => {
   return (
     <>
       {/* Backdrop: Only visible when sidebar is open */}
@@ -13,6 +13,9 @@ const Sidebar = ({ isSidebarVisible, closeSidebar }) => {
 
       {/* Sidebar */}
       <div className={`sidebar ${isSidebarVisible ? "visible" : ""}`}>
+        <button className="speaker-settings-button" onClick={openPopup}>
+          Speaker Settings
+        </button>
         <p>HELLOOOOO</p>
       </div>
     </>
