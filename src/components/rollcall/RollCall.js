@@ -47,6 +47,12 @@ const RollCall = () => {
           ))}
         </ul>
       </div>
+
+      {/* Fixed footer in the bottom right */}
+      <div className="rollcall-footer">
+        <p>Quorum: --</p>
+        <p>Total Members: --</p>
+      </div>
     </div>
   );
 };
