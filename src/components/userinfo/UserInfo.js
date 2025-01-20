@@ -3,6 +3,7 @@ import "./UserInfo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Sidebar from "../sidebar/Sidebar";
 import PasswordPopup from "../passwordpopup/PasswordPopup"; // Import the new popup component
+import sgalogo from "../assets/sgalogo.png"; // Ensure the correct path to your image
 
 const UserInfo = ({ name, user, handleSignOut, setShowResults }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -28,7 +29,7 @@ const UserInfo = ({ name, user, handleSignOut, setShowResults }) => {
         </div>
 
         <div className="title">
-          <h2>UHR Voting Dashboard</h2>
+          <img src={sgalogo} alt="SGA Logo" className="sgalogo" />
         </div>
 
         <div className="button-group">

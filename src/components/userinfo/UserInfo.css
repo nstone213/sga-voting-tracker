@@ -19,7 +19,7 @@
   align-items: flex-start;
 }
 
-/* Center the title absolutely within the user-info container */
+/* Center the logo absolutely within the user-info container */
 .title {
   position: absolute;
   left: 50%;
@@ -27,11 +27,12 @@
   text-align: center;
 }
 
-.title h2 {
-  font-family: "sans-serif", sans-serif; /* Change "Arial" to any other font */
-  font-size: 24px; /* Adjust size */
-  font-weight: 525; /* Adjust weight */
-  color: #333; /* Adjust color */
+/* Ensure the logo fits well */
+.sgalogo {
+  max-width: 100px; /* Adjust width as needed */
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Buttons are aligned to the right */
