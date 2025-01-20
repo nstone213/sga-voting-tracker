@@ -3,27 +3,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Align items at the top */
   height: 40vh;
-  padding: 20px; /* Adds spacing inside the box */
-  border-radius: 6px; /* Optional: rounded corners */
-  background-color: rgb(246, 246, 246); /* Ensures a consistent background */
-  width: 60%; /* Adjust width as needed */
-  max-width: 400px; /* Prevents excessive width on larger screens */
-  margin: auto; /* Centers horizontally */
+  padding: 20px;
+  border-radius: 6px;
+  background-color: rgb(246, 246, 246);
+  width: 60%;
+  max-width: 400px;
+  margin: auto;
+  position: relative; /* Ensure containment */
+}
+
+h2 {
+  margin-top: 10px; /* Adjust instead of negative margins */
+  text-align: center; /* Keep it centered */
+  width: 100%; /* Make sure it doesn’t overflow */
 }
 
 .voting-details {
   display: flex;
-  justify-content: space-between;
-  align-items: center; /* Align items vertically */
+  align-items: center;
+  justify-content: space-between; /* Align text to the top */
   width: 100%;
+  margin-bottom: 70px; /* Ensure space between elements */
 }
 
+
 .voting-details p {
-  position: relative;
-  top: -80px; /* Adjust the value to move elements up */
   font-size: 13px;
+  margin: 2px 0; /* Add a small margin for spacing */
 }
 
 

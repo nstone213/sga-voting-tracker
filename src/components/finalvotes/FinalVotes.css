@@ -14,20 +14,6 @@
     margin-bottom: 20px;
   }
   
-  /* Close button */
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
   /* Vote boxes container */
   .votes-container {
     display: flex;

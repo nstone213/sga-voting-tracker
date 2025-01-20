@@ -40,14 +40,15 @@ const VotingConsole = ({ user, votes, handleVote }) => {
           <p>Voting in progress...</p>
           <p>xx:xx:xx</p>
         </div>
-        <h2>BILL TBD</h2>
+        <h2 className="bill-title">BILL TBD</h2> {/* Apply new class if needed */}
+
         <div className="vote-buttons">
           {["yay", "nay", "abstain"].map((option) => (
             <button
               key={option}
               className={`vote-button ${option} ${selectedVote === option ? "selected" : ""}`}
-              onClick={() => !isSubmitted && setSelectedVote(option)} // Prevent changes if submitted
-              disabled={isSubmitted} // Disable after submission
+              onClick={() => !isSubmitted && setSelectedVote(option)}
+              disabled={isSubmitted}
             >
               {option.charAt(0).toUpperCase() + option.slice(1)}
             </button>
@@ -58,7 +59,7 @@ const VotingConsole = ({ user, votes, handleVote }) => {
           <button
             className="vote-button submit"
             onClick={submitVote}
-            disabled={!selectedVote || isSubmitted} // Disable if no selection or already submitted
+            disabled={!selectedVote || isSubmitted}
           >
             Submit
           </button>
