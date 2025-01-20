@@ -97,6 +97,7 @@ h2 {
 }
 
 .vote-button.submit {
+  height: 40px;
   width: calc(80px * 3 + 20px); /* Same width as three vote buttons + gaps */
   background-color: rgb(118, 137, 176);
   color: white;
