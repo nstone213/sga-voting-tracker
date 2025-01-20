@@ -13,7 +13,7 @@
     margin: auto; /* Centers horizontally */
     margin-bottom: 20px;
   }
-  
+
   /* Vote boxes container */
   .votes-container {
     display: flex;
@@ -31,15 +31,15 @@
   }
   
   .vote-box.yay {
-    background-color: green;
+    background-color: rgba(15,186,129,255)
   }
   
   .vote-box.nay {
-    background-color: red;
+    background-color: rgb(214, 75, 75);
   }
   
   .vote-box.abstain {
-    background-color: yellow;
+    background-color: rgb(242, 242, 69);
   }
   
   .vote-box.none {
