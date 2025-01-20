@@ -14,7 +14,9 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
     return /^[A-Za-z]+, [A-Za-z]+$/.test(name.trim()); // Matches "Last, First"
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
     if (!isValidNameFormat(inputName)) {
       setErrorMessage("Name must be in Last Name, First Name format");
       setTimeout(() => setErrorMessage(""), 3000); // Hide error after 3 seconds
@@ -44,25 +46,27 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
     <div className="login-wrapper">
       <div className="login-container">
         <p>Login to continue:</p>
-        <input
-          type="text"
-          value={inputName}
-          onChange={(e) => setInputName(e.target.value)}
-          placeholder="Last name, First name"
-        />
-        <input
-          type="text"
-          value={inputUsername}
-          onChange={(e) => setInputUsername(e.target.value)}
-          placeholder="GT username"
-        />
-        <button 
-          className="loginsubmit" 
-          onClick={handleLogin}
-          disabled={!inputName.trim() || !inputUsername.trim()} // Disabled until both fields are filled
-        >
-          Submit
-        </button>
+        <form onSubmit={handleLogin}> {/* Form element added */}
+          <input
+            type="text"
+            value={inputName}
+            onChange={(e) => setInputName(e.target.value)}
+            placeholder="Last name, First name"
+          />
+          <input
+            type="text"
+            value={inputUsername}
+            onChange={(e) => setInputUsername(e.target.value)}
+            placeholder="GT username"
+          />
+          <button 
+            className="loginsubmit" 
+            type="submit" // Change button type to submit
+            disabled={!inputName.trim() || !inputUsername.trim()} // Disabled until both fields are filled
+          >
+            Submit
+          </button>
+        </form>
         {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
       </div>
     </div>

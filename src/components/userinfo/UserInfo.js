@@ -32,9 +32,6 @@ const UserInfo = ({ name, user, handleSignOut, setShowResults }) => {
         </div>
 
         <div className="button-group">
-          <button className="results-button">
-            Results <i className="fas fa-check-to-slot"></i>
-          </button>
           <button onClick={handleSignOut} className="sign-out-button">
             Sign Out <i className="fas fa-right-from-bracket"></i>
           </button>
