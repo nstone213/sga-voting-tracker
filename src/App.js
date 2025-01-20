@@ -18,8 +18,12 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const activeUser = sessionStorage.getItem("activeUser");
+  
       if (user) {
         setUser(user);
+        sessionStorage.setItem("activeUser", user.uid); // Persist session
+  
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           setName(userDoc.data().name);
@@ -28,8 +32,10 @@ function App() {
       } else {
         setUser(null);
       }
+  
       setIsLoading(false);
     });
+  
     return () => unsubscribe();
   }, []);
 
@@ -50,6 +56,25 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const handleTabClose = async () => {
+      if (!document.hidden) return; // Ensures it only runs when the tab is truly closed
+  
+      if (user && sessionStorage.getItem("activeUser")) {
+        sessionStorage.removeItem("activeUser"); // Remove session
+        navigator.sendBeacon("/logout", JSON.stringify({ uid: user.uid })); // Ensures request is sent on close
+        await deleteDoc(doc(db, "users", user.uid));
+        await signOut(auth);
+      }
+    };
+  
+    document.addEventListener("visibilitychange", handleTabClose);
+  
+    return () => {
+      document.removeEventListener("visibilitychange", handleTabClose);
+    };
+  }, [user]);  
+  
   const handleVote = async (uid, vote) => {
     if (!user || user.uid !== uid) return;
     const userDocRef = doc(db, "users", uid);
