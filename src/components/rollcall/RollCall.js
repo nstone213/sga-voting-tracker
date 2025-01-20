@@ -29,9 +29,12 @@ const RollCall = () => {
     <div className="rollcall-container">
       <div className="rollcall-header">
         <p className="rollcall-title">Roll Call</p>
-        <button className="information-button">
-          <i className="fas fa-circle-info"></i>
-        </button>
+        <div className="information-button-container">
+            <button className="information-button">
+                <i className="fas fa-circle-info"></i>
+            </button>
+            <span className="tooltip-text">HI!!</span>
+        </div>
       </div>
 
       {/* Scrollable section for names */}
