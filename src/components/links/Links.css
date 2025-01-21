@@ -6,7 +6,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
+    background-color: none;
     padding: 10px 0;
     transition: background-color 0.3s ease-in-out;
 }
@@ -41,19 +41,10 @@
     color: rgb(72, 35, 86);
 }
 
-/* 🌙 Dark Mode Styling */
-.dark-links {
-    background-color: #656060; /* Darker shade for links container */
-}
-
-.dark-links ul {
-    width: 50%;
-}
-
-.dark-links a {
-    color: #d3d3d3; /* Light gray text */
-}
-
-.dark-links a:hover {
-    color: #b28dfa; /* Soft purple highlight */
-}
+  .dark-links a {
+    color: #e2e2e2;
+  }
+  
+  .dark-links a:hover {
+    color: #b28dfa;
+  }

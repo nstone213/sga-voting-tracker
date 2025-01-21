@@ -7,6 +7,7 @@ import VotingConsole from "./components/votingConsole/VotingConsole";
 import SignIn from "./components/signin/SignIn";
 import UserInfo from "./components/userinfo/UserInfo";
 import Links from "./components/links/Links";
+import ToggleSwitch from "./components/links/toggleswitch/ToggleSwitch"; // Make sure it's imported!
 import { auth, db } from "./components/firebaseconfig/firebaseConfig";
 
 function App() {
@@ -15,6 +16,24 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [votes, setVotes] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
+
+  // Load dark mode preference from localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode") === "true";
+    setIsDarkMode(savedMode);
+    document.body.classList.toggle("dark-mode", savedMode);
+  }, []);
+
+  // Toggle dark mode and store preference
+  const handleToggleDarkMode = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("darkMode", newMode);
+      document.body.classList.toggle("dark-mode", newMode);
+      return newMode;
+    });
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -74,7 +93,13 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <div className={`container ${isDarkMode ? "dark-container" : ""}`}>
+      {/* ✅ Always Visible Toggle Switch */}
+      <div className="toggle-container">
+        <ToggleSwitch isOn={isDarkMode} handleToggle={handleToggleDarkMode} />
+      </div>
+
+      {/* ✅ Rest of the App */}
       {submitted && (
         <UserInfo name={name} user={user} handleSignOut={handleSignOut} />
       )}
@@ -83,7 +108,8 @@ function App() {
       ) : (
         <VotingConsole user={user} votes={votes} handleVote={handleVote} />
       )}
-      <Links/>
+
+      <Links isDarkMode={isDarkMode} />
     </div>
   );
 }

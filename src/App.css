@@ -14,7 +14,27 @@ body {
   padding-top: 80px; /* Adjust this to match the height of .user-info */
 }
 
+/* Light Mode (Default) */
+.container {
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+}
+
+/* Dark Mode Background */
+.dark-container {
+  background-color: #333333;
+}
+
 /* Global Dark Mode */
 .dark-mode {
-  background-color: #656060;
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Dark mode toggle container */
+.toggle-container {
+  position: fixed;
+  top: 100px;
+  right: 10px;
 }
