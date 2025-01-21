@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FinalVotes.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const FinalVotes = ({ votes }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+    document.body.classList.toggle("no-scroll", !isExpanded);
+  };
+
   return (
     <>
-      <div className="results-modal">
+      {isExpanded && <div className="overlay" onClick={toggleExpand}></div>}
+      <div className={`results-modal ${isExpanded ? "expanded" : ""}`}>
+        {isExpanded && (
+          <button className="close-button" onClick={toggleExpand}>
+            &times;
+          </button>
+        )}
         <div className="votes-container">
           {Object.entries(votes).map(([uid, data]) => (
-            <div key={uid} className={`vote-box ${data.vote}`} title={data.name}></div>
+            <div
+              key={uid}
+              className={`vote-box ${data.vote}`}
+              title={data.name}
+            ></div>
           ))}
         </div>
-        <button className="expand-button">
-          <i className="fas fa-expand"></i>
-        </button>
+        {!isExpanded && (
+          <button className="expand-button" onClick={toggleExpand}>
+            <i className="fas fa-expand"></i>
+          </button>
+        )}
       </div>
     </>
   );
