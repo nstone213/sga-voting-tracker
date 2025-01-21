@@ -34,7 +34,7 @@ const VotingConsole = ({ user, votes, handleVote }) => {
     <div className="voting-console">
       <RollCall />
       <div className="voting-section">
-        <div className="results-container">
+        <div>
           <FinalVotes votes={votes} />
         </div>
         <div className="voting-container">

@@ -3,7 +3,6 @@ import "./FinalVotes.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const FinalVotes = ({ votes }) => {
-
   return (
     <>
       <div className="results-modal">
@@ -12,6 +11,9 @@ const FinalVotes = ({ votes }) => {
             <div key={uid} className={`vote-box ${data.vote}`} title={data.name}></div>
           ))}
         </div>
+        <button className="expand-button">
+          <i className="fas fa-expand"></i>
+        </button>
       </div>
     </>
   );
