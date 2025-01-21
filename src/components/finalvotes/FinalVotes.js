@@ -19,15 +19,26 @@ const FinalVotes = ({ votes }) => {
             &times;
           </button>
         )}
-        <div className="votes-container">
-          {Object.entries(votes).map(([uid, data]) => (
-            <div
-              key={uid}
-              className={`vote-box ${data.vote}`}
-              title={data.name}
-            ></div>
-          ))}
+        
+        {/* Container for votes and summary */}
+        <div className="expanded-content">
+          <div className="votes-container">
+            {Object.entries(votes).map(([uid, data]) => (
+              <div
+                key={uid}
+                className={`vote-box ${data.vote}`}
+                title={data.name}
+              ></div>
+            ))}
+          </div>
+
+          {isExpanded && (
+            <div className="summary-box">
+              <p>Summary of votes will go here...</p>
+            </div>
+          )}
         </div>
+
         {!isExpanded && (
           <button className="expand-button" onClick={toggleExpand}>
             <i className="fas fa-expand"></i>
