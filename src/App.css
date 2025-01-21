@@ -35,6 +35,7 @@ body {
 /* Dark mode toggle container */
 .toggle-container {
   position: fixed;
-  top: 100px;
-  right: 10px;
+  bottom: 30px;
+  left: 20px;
+  z-index: 1000;
 }
