@@ -101,7 +101,7 @@ function App() {
 
       {/* ✅ Rest of the App */}
       {submitted && (
-        <UserInfo name={name} user={user} handleSignOut={handleSignOut} />
+        <UserInfo name={name} user={user} handleSignOut={handleSignOut} isDarkMode={isDarkMode} />
       )}
       {!submitted ? (
         <SignIn setUser={setUser} setName={setName} setSubmitted={setSubmitted} />

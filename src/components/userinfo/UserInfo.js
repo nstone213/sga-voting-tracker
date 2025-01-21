@@ -5,7 +5,7 @@ import Sidebar from "../sidebar/Sidebar";
 import PasswordPopup from "../passwordpopup/PasswordPopup"; // Import the new popup component
 import sgalogo from "../assets/sgalogo.png"; // Ensure the correct path to your image
 
-const UserInfo = ({ name, user, handleSignOut, setShowResults }) => {
+const UserInfo = ({ name, handleSignOut, isDarkMode }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -23,7 +23,7 @@ const UserInfo = ({ name, user, handleSignOut, setShowResults }) => {
 
   return (
     <>
-      <div className="user-info">
+      <div className={`user-info ${isDarkMode ? "dark-user-info" : ""}`}>
         <div className="user-details">
           {name && <div className="user-name">{name}</div>}
         </div>

@@ -1,15 +1,16 @@
 .user-info {
-  position: fixed; /* Ensures it stays in place even when scrolling */
-  top: 0; /* Sticks to the top of the page */
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
   background-color: rgb(195, 203, 219);
   padding: 27px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Keeps elements aligned */
-  z-index: 1000; /* Ensures it stays above other content */
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 /* User name stays left-aligned */
@@ -63,4 +64,15 @@
   border: none;
   font-size: 18px;
   cursor: pointer;
+}
+
+/* 🌙 Dark Mode */
+.dark-user-info {
+  background-color: #252424; /* Darker background */
+  color: #ffffff; /* Light text for contrast */
+  box-shadow: 0px 2px 5px rgba(18, 18, 18, 0.1); /* Lighter shadow for dark mode */
+}
+
+.dark-user-info .menu-button {
+  color: #ffffff;
 }
