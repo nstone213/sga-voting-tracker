@@ -13,3 +13,8 @@
 body {
   padding-top: 80px; /* Adjust this to match the height of .user-info */
 }
+
+/* Global Dark Mode */
+.dark-mode {
+  background-color: #656060;
+}
