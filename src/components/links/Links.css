@@ -1,11 +1,14 @@
+/* Light Mode (Default) */
 .links-container {
     position: fixed;
-    bottom: 20px;  /* Adjust this value if needed */
+    bottom: 20px;
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: center; /* Center the links horizontally */
-    background-color: rgb(255, 255, 255); /* Ensures a consistent background */
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 0;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .toggleswitch-container {
@@ -20,19 +23,37 @@
     margin: 0;
     display: flex;
     justify-content: space-evenly;
-    width: 50%;  /* Adjust this value based on your preference */
+    width: 50%;
 }
 
 .links-container li {
-    margin: 0; /* No extra margin needed since space-evenly handles spacing */
+    margin: 0;
 }
 
 .links-container a {
     text-decoration: none;
     color: rgb(113, 113, 113);
     font-size: 14px;
+    transition: color 0.3s ease-in-out;
 }
 
 .links-container a:hover {
     color: rgb(72, 35, 86);
+}
+
+/* 🌙 Dark Mode Styling */
+.dark-links {
+    background-color: #656060; /* Darker shade for links container */
+}
+
+.dark-links ul {
+    width: 50%;
+}
+
+.dark-links a {
+    color: #d3d3d3; /* Light gray text */
+}
+
+.dark-links a:hover {
+    color: #b28dfa; /* Soft purple highlight */
 }

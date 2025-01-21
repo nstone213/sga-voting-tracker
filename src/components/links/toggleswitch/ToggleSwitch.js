@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ToggleSwitch.css";
 
-const ToggleSwitch = ({ isOn, handleToggle, label }) => {
+const ToggleSwitch = ({ isOn, handleToggle }) => {
+  useEffect(() => {
+    if (isOn) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [isOn]);
+
   return (
     <div className="toggle-container">
       <div className={`toggle-switch ${isOn ? "on" : "off"}`} onClick={handleToggle}>
