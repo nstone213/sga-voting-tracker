@@ -86,3 +86,27 @@
   margin: auto;
   position: relative;
 }
+
+/* Submit button styling */
+.submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.vote-button.submit {
+  height: 40px;
+  width: calc(80px * 3 + 20px);
+  background-color: rgb(118, 137, 176);
+  color: white;
+  padding: 12px 0;
+  font-size: 18px;
+  border-radius: 100px;
+  text-align: center;
+}
+
+.vote-button.submit:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
