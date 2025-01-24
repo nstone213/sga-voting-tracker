@@ -10,20 +10,6 @@
   padding: 20px;
 }
 
-
-/* RollCall section (left side) */
-.roll-call {
-  flex: 1;
-  max-width: 250px; /* Adjust width as needed */
-}
-
-/* Container for FinalVotes and Voting box */
-.voting-section {
-  display: flex;
-  flex-direction: column;
-  flex: 2; /* Takes up twice as much space as RollCall */
-}
-
 /* Voting container */
 .voting-container {
   display: flex;
