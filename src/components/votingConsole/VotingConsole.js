@@ -4,6 +4,7 @@ import "./VotingConsole.css";
 import FinalVotes from "../finalvotes/FinalVotes";
 import RollCall from "../rollcall/RollCall";
 import VoteButtons from "../votebuttons/VoteButtons"; // Import the new component
+import Agenda from "../agenda/Agenda";
 
 const VotingConsole = ({ user, votes, handleVote }) => {
   const [selectedVote, setSelectedVote] = useState(null);
@@ -56,6 +57,7 @@ const VotingConsole = ({ user, votes, handleVote }) => {
 
   return (
     <div className="voting-console">
+      <Agenda />
       <RollCall />
       <div className="voting-section">
         <div>
