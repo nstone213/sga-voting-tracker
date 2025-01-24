@@ -69,3 +69,11 @@ h2 {
   background-color: lightgray;
   cursor: not-allowed;
 }
+
+.redirect-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; /* Ensures vertical centering */
+  text-align: center;
+}

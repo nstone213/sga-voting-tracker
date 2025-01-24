@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./VotingConsole.css";
 import FinalVotes from "../finalvotes/FinalVotes";
 import RollCall from "../rollcall/RollCall";
@@ -7,6 +8,8 @@ import VoteButtons from "../votebuttons/VoteButtons"; // Import the new componen
 const VotingConsole = ({ user, votes, handleVote }) => {
   const [selectedVote, setSelectedVote] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [countdown, setCountdown] = useState(5); // Initialize countdown
+  const navigate = useNavigate(); // React Router navigation
 
   useEffect(() => {
     const savedVote = localStorage.getItem(`vote-${user?.uid}`);
@@ -26,9 +29,30 @@ const VotingConsole = ({ user, votes, handleVote }) => {
     );
   };
 
+  // Redirect logic when user is not found
+  useEffect(() => {
+    if (!user?.uid || !votes[user.uid]) {
+      const interval = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+
+      setTimeout(() => {
+        navigate("/"); // Redirect to Sign-In page
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
+  }, [user, votes, navigate]);
+
+  // Show countdown message and redirect when user is not found
   if (!user?.uid || !votes[user.uid]) {
-    return <p>Loading your vote...</p>;
+    return (
+      <div className="redirect-message">
+        <p>You will be redirected in {countdown} seconds...</p>
+      </div>
+    );
   }
+  
 
   return (
     <div className="voting-console">
