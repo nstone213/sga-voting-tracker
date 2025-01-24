@@ -34,7 +34,7 @@ const FinalVotes = ({ votes }) => {
 
           {isExpanded && (
             <div className="summary-box">
-              <p>Summary of votes will go here...</p>
+              <p>Summary votes will go here...</p>
             </div>
           )}
         </div>

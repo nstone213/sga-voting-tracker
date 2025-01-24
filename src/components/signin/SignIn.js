@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { signInAnonymously } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseconfig/firebaseConfig";
@@ -9,6 +10,8 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
   const [inputName, setInputName] = useState("");
   const [inputUsername, setInputUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
+
+  const navigate = useNavigate(); // Hook to navigate to another page
 
   // Function to validate name format (Last, First)
   const isValidNameFormat = (name) => {
@@ -38,6 +41,9 @@ const SignIn = ({ setUser, setName, setSubmitted }) => {
         vote: "none",
         timestamp: new Date(),
       });
+
+      console.log("Navigating to /home..."); // Debugging step
+      navigate("/home"); // Redirect to home page after successful login
     } catch (error) {
       console.error("Error signing in anonymously:", error);
     }
