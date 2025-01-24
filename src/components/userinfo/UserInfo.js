@@ -43,7 +43,7 @@ const UserInfo = ({ name, isDarkMode }) => {
       </div>
 
       {/* Sidebar */}
-      <Sidebar isSidebarVisible={isSidebarVisible} closeSidebar={closeSidebar} openPopup={openPopup} />
+      <Sidebar isSidebarVisible={isSidebarVisible} closeSidebar={closeSidebar} openPopup={openPopup} handleSignOut={handleSignOut} />
 
       {/* Password Popup */}
       {isPopupVisible && <PasswordPopup closePopup={closePopup} />}
