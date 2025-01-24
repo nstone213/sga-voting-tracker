@@ -22,6 +22,9 @@ const RollCall = () => {
     return () => unsubscribe();
   }, []);
 
+  // Count active users
+  const activeUserCount = predefinedNames.filter((name) => loggedInUsers.includes(name)).length;
+
   return (
     <div className="rollcall-container">
       <div className="rollcall-header">
@@ -48,7 +51,7 @@ const RollCall = () => {
       {/* Fixed footer in the bottom right */}
       <div className="rollcall-footer">
         <p>Quorum: --</p>
-        <p>Members Logged: --</p>
+        <p>Members Logged: {activeUserCount}</p> {/* Dynamically updates active users */}
       </div>
     </div>
   );
