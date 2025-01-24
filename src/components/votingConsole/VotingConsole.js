@@ -46,8 +46,13 @@ const VotingConsole = ({ user, votes, handleVote }) => {
 
   // Show countdown message and redirect when user is not found
   if (!user?.uid || !votes[user.uid]) {
-    return <p>You will be redirected in {countdown} seconds...</p>;
+    return (
+      <div className="redirect-message">
+        <p>You will be redirected in {countdown} seconds...</p>
+      </div>
+    );
   }
+  
 
   return (
     <div className="voting-console">
