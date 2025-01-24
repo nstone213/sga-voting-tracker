@@ -4,10 +4,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Sidebar from "../sidebar/Sidebar";
 import PasswordPopup from "../passwordpopup/PasswordPopup"; // Import the new popup component
 import sgalogo from "../assets/sgalogo.png"; // Ensure the correct path to your image
+import SpeakerSettingsPopup from "../passwordpopup/speakersettingspopup/SpeakerSettingsPopup";
+
 
 const UserInfo = ({ name, isDarkMode, handleSignOut }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [showSpeakerSettings, setShowSpeakerSettings] = useState(false);
 
   // Function to close sidebar
   const closeSidebar = () => setIsSidebarVisible(false);
@@ -19,7 +22,10 @@ const UserInfo = ({ name, isDarkMode, handleSignOut }) => {
   };
 
   // Function to close the password popup
-  const closePopup = () => setIsPopupVisible(false);
+  const closePopup = () => {
+    setIsPopupVisible(false);
+    setShowSpeakerSettings(true);
+  };
 
   return (
     <>
@@ -47,6 +53,7 @@ const UserInfo = ({ name, isDarkMode, handleSignOut }) => {
 
       {/* Password Popup */}
       {isPopupVisible && <PasswordPopup closePopup={closePopup} />}
+      {showSpeakerSettings && <SpeakerSettingsPopup closePopup={() => setShowSpeakerSettings(false)} />}
     </>
   );
 };
