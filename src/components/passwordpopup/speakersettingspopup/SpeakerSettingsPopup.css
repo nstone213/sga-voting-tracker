@@ -1,7 +1,7 @@
 .speaker-popup {
     position: absolute;
-    width: 300px;
-    height: 200px;
+    width: 500px;
+    height: 400px;
     background: #ccc;
     border-radius: 8px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);

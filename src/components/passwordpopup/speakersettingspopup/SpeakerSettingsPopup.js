@@ -49,10 +49,10 @@ const SpeakerSettingsPopup = ({ closePopup }) => {
           className="bill-input"
         />
         
-        <label htmlFor="volume-slider">Volume:</label>
+        <label htmlFor="time-slider">Time:</label>
         <input
           type="range"
-          id="volume-slider"
+          id="time-slider"
           min="0"
           max="30"
           step="5"
