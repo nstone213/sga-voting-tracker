@@ -2,6 +2,7 @@ import React from "react";
 import "./VoteButtons.css";
 
 const VoteButtons = ({ selectedVote, setSelectedVote, isSubmitted }) => {
+
   return (
     <div className="voting-container">
         <div className="voting-details">

@@ -53,7 +53,6 @@ const VotingConsole = ({ user, votes, handleVote }) => {
       </div>
     );
   }
-  
 
   return (
     <div className="voting-console">

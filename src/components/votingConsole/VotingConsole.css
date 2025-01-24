@@ -11,12 +11,6 @@
   padding: 20px;
 }
 
-h2 {
-  margin-top: 10px;
-  text-align: center;
-  width: 100%;
-}
-
 /* Submit button styling */
 .submit-container {
   display: flex;
