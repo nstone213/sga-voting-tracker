@@ -3,7 +3,7 @@ import "./VoteButtons.css";
 
 const VoteButtons = ({ selectedVote, setSelectedVote, isSubmitted }) => {
   return (
-    <>
+    <div className="voting-container">
         <div className="voting-details">
             <p>Voting in progress...</p>
             <p>xx:xx:xx</p>
@@ -21,7 +21,7 @@ const VoteButtons = ({ selectedVote, setSelectedVote, isSubmitted }) => {
             </button>
         ))}
         </div>
-    </>
+    </div>
   );
 };
 

@@ -70,3 +70,19 @@
   .voting-details p {
     font-size: 12px;
   }
+
+  /* Voting container */
+.voting-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40vh;
+  padding: 20px;
+  border-radius: 6px;
+  background-color: rgb(246, 246, 246);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  position: relative;
+}
