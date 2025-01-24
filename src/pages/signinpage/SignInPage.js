@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SignIn from "../../components/signin/SignIn";
+import './SignInPage.css'
 
 function SignInPage() {
   const [user, setUser] = useState(null);
@@ -7,7 +8,7 @@ function SignInPage() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div className="container">
+    <div className="signinpage-container">
       <SignIn setUser={setUser} setName={setName} setSubmitted={setSubmitted} />
     </div>
   );

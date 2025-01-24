@@ -8,6 +8,7 @@ import { auth, db } from "../../components/firebaseconfig/firebaseConfig";
 import { doc, getDoc, onSnapshot, collection, setDoc, deleteDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import Loader from "../../components/loader/Loader";
+import './Home.css';
 
 function Home() {
   const [user, setUser] = useState(null);

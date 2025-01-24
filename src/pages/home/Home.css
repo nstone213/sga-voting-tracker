@@ -1,0 +1,9 @@
+/* Light Mode (Default) */
+.container {
+    text-align: center;
+    margin-top: 50px;
+    position: relative;
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
