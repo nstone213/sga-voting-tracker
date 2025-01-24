@@ -5,8 +5,9 @@
   align-items: flex-start; /* Aligns items at the top */
   gap: 20px; /* Adds space between RollCall and the other sections */
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
+  margin-right: 150px;
   padding: 20px;
 }
 
