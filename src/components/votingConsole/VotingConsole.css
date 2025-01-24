@@ -5,69 +5,10 @@
   align-items: flex-start; /* Aligns items at the top */
   gap: 20px; /* Adds space between RollCall and the other sections */
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
+  margin-right: 150px;
   padding: 20px;
-}
-
-
-/* RollCall section (left side) */
-.roll-call {
-  flex: 1;
-  max-width: 250px; /* Adjust width as needed */
-}
-
-/* Container for FinalVotes and Voting box */
-.voting-section {
-  display: flex;
-  flex-direction: column;
-  flex: 2; /* Takes up twice as much space as RollCall */
-}
-
-/* Voting container */
-.voting-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: 40vh;
-  padding: 20px;
-  border-radius: 6px;
-  background-color: rgb(246, 246, 246);
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
-  position: relative;
-}
-
-h2 {
-  margin-top: 10px;
-  text-align: center;
-  width: 100%;
-}
-
-/* Submit button styling */
-.submit-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.vote-button.submit {
-  height: 40px;
-  width: calc(80px * 3 + 20px);
-  background-color: rgb(118, 137, 176);
-  color: white;
-  padding: 12px 0;
-  font-size: 18px;
-  border-radius: 100px;
-  text-align: center;
-}
-
-.vote-button.submit:disabled {
-  background-color: lightgray;
-  cursor: not-allowed;
 }
 
 .redirect-message {

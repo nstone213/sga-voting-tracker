@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./VoteButtons.css";
 
-const VoteButtons = ({ selectedVote, setSelectedVote, isSubmitted }) => {
+const VoteButtons = ({ selectedVote, setSelectedVote, isSubmitted, user, handleVote }) => {
+  useEffect(() => {
+    const savedVote = localStorage.getItem(`vote-${user?.uid}`);
+    if (savedVote) {
+      const { vote, submitted } = JSON.parse(savedVote);
+      setSelectedVote(vote);
+    }
+  }, [user?.uid, setSelectedVote]);
+
+  const submitVote = () => {
+    if (selectedVote) {
+      handleVote(user.uid, selectedVote);
+      localStorage.setItem(
+        `vote-${user.uid}`,
+        JSON.stringify({ vote: selectedVote, submitted: true })
+      );
+    }
+  };
+
   return (
-    <>
+    <div className="voting-container">
         <div className="voting-details">
             <p>Voting in progress...</p>
             <p>xx:xx:xx</p>
@@ -21,7 +39,12 @@ const VoteButtons = ({ selectedVote, setSelectedVote, isSubmitted }) => {
             </button>
         ))}
         </div>
-    </>
+        <div className="submit-container">
+          <button className="vote-button submit" onClick={submitVote} disabled={!selectedVote || isSubmitted} >
+            Submit
+          </button>
+        </div>
+    </div>
   );
 };
 
