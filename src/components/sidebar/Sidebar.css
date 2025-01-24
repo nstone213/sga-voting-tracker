@@ -4,7 +4,7 @@
   top: 0;
   right: -250px; /* Start off-screen */
   width: 320px;
-  height: 100vh;
+  height: 95.5vh;
   background-color: #e5dbdb;
   color: black;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
@@ -13,7 +13,7 @@
   z-index: 1001;
   opacity: 0; /* Start invisible */
   visibility: hidden; /* Hide initially */
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
 /* Sidebar slides in */
@@ -82,4 +82,17 @@
   background-color: rgb(99, 99, 99);
   color: white;
   margin-right: 10px; /* Adjust as needed */
+  position: absolute; /* Position it at the bottom */
+  bottom: 20px; /* Adjust spacing from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Ensure it's centered */
+  max-width: 85%; /* Adjust width if needed */
+}
+
+.speaker-settings-button,
+.sign-out-button {
+  display: block; /* Makes them take up full width */
+  width: 100%; /* Adjust width if necessary */
+  text-align: center; /* Center text */
+  margin-bottom: 10px; /* Add spacing between buttons */
 }
