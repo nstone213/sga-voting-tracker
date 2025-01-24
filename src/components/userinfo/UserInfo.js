@@ -5,7 +5,7 @@ import Sidebar from "../sidebar/Sidebar";
 import PasswordPopup from "../passwordpopup/PasswordPopup"; // Import the new popup component
 import sgalogo from "../assets/sgalogo.png"; // Ensure the correct path to your image
 
-const UserInfo = ({ name, handleSignOut, isDarkMode }) => {
+const UserInfo = ({ name, isDarkMode }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -33,9 +33,6 @@ const UserInfo = ({ name, handleSignOut, isDarkMode }) => {
         </div>
 
         <div className="button-group">
-          <button onClick={handleSignOut} className="sign-out-button">
-            Sign Out <i className="fas fa-right-from-bracket"></i>
-          </button>
           <button
             className="menu-button"
             onClick={() => setIsSidebarVisible(!isSidebarVisible)}

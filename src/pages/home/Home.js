@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import VotingConsole from "../../components/votingConsole/VotingConsole";
 import UserInfo from "../../components/userinfo/UserInfo";
 import Links from "../../components/links/Links";
-import ToggleSwitch from "../../components/links/toggleswitch/ToggleSwitch";
+import ToggleSwitch from "../../components/toggleswitch/ToggleSwitch";
 import { auth, db } from "../../components/firebaseconfig/firebaseConfig";
 import { doc, getDoc, onSnapshot, collection, setDoc, deleteDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";

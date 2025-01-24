@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup }) => {
+const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup, handleSignOut }) => {
   const [isClosing, setIsClosing] = useState(false);
 
   const handleBackdropClick = () => {
@@ -33,6 +33,9 @@ const Sidebar = ({ isSidebarVisible, closeSidebar, openPopup }) => {
         <button className="speaker-settings-button" onClick={openPopup}>
           Speaker Settings
         </button>
+        <button onClick={handleSignOut} className="sign-out-button">
+            Sign Out <i className="fas fa-right-from-bracket"></i>
+          </button>
       </div>
     </>
   );
