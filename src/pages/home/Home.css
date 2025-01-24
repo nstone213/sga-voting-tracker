@@ -1,9 +1,24 @@
-/* Light Mode (Default) */
-.container {
-    text-align: center;
-    margin-top: 50px;
-    position: relative;
+/* Ensure transition is applied globally for both dark and light mode */
+body, .container {
     background-color: #ffffff;
     color: #000000;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
+    padding-top: 60px;
+  }
+  .dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  /* Dark Mode Background */
+  .dark-container {
+      background-color: #333333;
+  }
+  
+  /* Toggle Switch Container */
+  .toggle-container {
+      position: fixed;
+      bottom: 30px;
+      left: 20px;
+      z-index: 1000;
+  }
