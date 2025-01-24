@@ -5,21 +5,22 @@
     background: #ccc;
     border-radius: 8px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    cursor: move;
     user-select: none;
+    z-index: 1001;
   }
   
   .speaker-header {
-    background: #444;
-    color: white;
+    background: #ccc;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     cursor: grab;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   
-  .close-button {
-    background: red;
+  .clos-button {
+    background: none;
     border: none;
     color: white;
     cursor: pointer;

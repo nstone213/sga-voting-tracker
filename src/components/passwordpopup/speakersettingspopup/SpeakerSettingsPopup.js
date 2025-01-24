@@ -35,7 +35,7 @@ const SpeakerSettingsPopup = ({ closePopup }) => {
     >
       <div className="speaker-header" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
         <span>Speaker Settings</span>
-        <button className="close-button" onClick={closePopup}>X</button>
+        <button className="clos-button" onClick={closePopup}>X</button>
       </div>
       <div className="speaker-content">
         <p>Adjust your speaker settings here.</p>
