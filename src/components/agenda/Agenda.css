@@ -13,3 +13,9 @@
     overflow: visible; /* Prevents content from escaping */
     position: relative; /* Needed for absolute positioning of fade effect */
 }
+
+.agenda-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}

@@ -5,7 +5,7 @@ const Agenda = () => {
 
   return (
     <div className="agenda-container">
-        <p>HIHIHI</p>
+        <p className="agenda-title">Undergraduate House of Representatives Agenda</p>
     </div>
   );  
 };
