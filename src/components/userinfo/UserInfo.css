@@ -43,20 +43,12 @@
 }
 
 /* Individual button styles */
-.sign-out-button,
 .menu-button {
   padding: 10px 15px;
   border: none;
   cursor: pointer;
   border-radius: 100px;
   font-size: 14px;
-}
-
-/* Now you can adjust pixel spacing for individual buttons */
-.sign-out-button {
-  background-color: rgb(99, 99, 99);
-  color: white;
-  margin-right: 10px; /* Adjust as needed */
 }
 
 .menu-button {
