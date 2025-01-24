@@ -94,7 +94,6 @@ const SpeakerSettingsPopup = ({ closePopup, setBillDetails }) => {
         />
         <span>{sliderValue} min</span>
 
-        {/* Submit Button */}
         <button className="submit-button" onClick={handleSubmit} disabled={loading}>
           {loading ? "Saving..." : "Submit"}
         </button>
