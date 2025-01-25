@@ -5,6 +5,7 @@ import FinalVotes from "../finalvotes/FinalVotes";
 import RollCall from "../rollcall/RollCall";
 import VoteButtons from "../votebuttons/VoteButtons";
 import Agenda from "../agenda/Agenda";
+import Announcements from "../announcements/Announcements";
 
 const VotingConsole = ({ user, votes, handleVote }) => {
   const [countdown, setCountdown] = useState(5);
@@ -46,13 +47,26 @@ const VotingConsole = ({ user, votes, handleVote }) => {
   return (
     <div className="voting-console">
       <Agenda />
-      <RollCall />
+      <div className="middle-section">
+        <div className="rollcall-section">
+          <RollCall />
+        </div>
+        <div className="announcements-section">
+          <Announcements />
+        </div>
+      </div>
       <div className="voting-section">
         <div>
           <FinalVotes votes={votes} />
         </div>
         <div>
-          <VoteButtons selectedVote={selectedVote} setSelectedVote={setSelectedVote} isSubmitted={isSubmitted} user={user} handleVote={handleVote} />
+          <VoteButtons 
+            selectedVote={selectedVote} 
+            setSelectedVote={setSelectedVote} 
+            isSubmitted={isSubmitted} 
+            user={user} 
+            handleVote={handleVote} 
+          />
         </div>
       </div>
     </div>
