@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { db } from "../../../components/firebaseconfig/firebaseConfig"; // Import Firebase config
 import { doc, setDoc } from "firebase/firestore";
 import "./SpeakerSettingsPopup.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const SpeakerSettingsPopup = ({ closePopup, setBillDetails }) => {
   const [position, setPosition] = useState({ x: 100, y: 100 });
@@ -68,7 +69,9 @@ const SpeakerSettingsPopup = ({ closePopup, setBillDetails }) => {
     >
       <div className="speaker-header" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
         <span>Speaker Settings</span>
-        <button className="close-button" onClick={closePopup}>X</button>
+        <button className="exit-button" onClick={closePopup}>
+            &times;
+          </button>
       </div>
       <div className="speaker-content">
         <label htmlFor="bill-name">Bill Name:</label>
