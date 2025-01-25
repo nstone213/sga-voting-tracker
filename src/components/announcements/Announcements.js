@@ -6,7 +6,7 @@ const Announcements = () => {
   
   return (
     <div className='announcements-container'>
-        
+      <p>Announcements</p>
     </div>
   );
 };
