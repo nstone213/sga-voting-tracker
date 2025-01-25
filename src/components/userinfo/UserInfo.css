@@ -29,11 +29,12 @@
 }
 
 /* Ensure the logo fits well */
-.sgalogo {
-  max-width: 100px; /* Adjust width as needed */
+.gtPoliTechslogo {
+  max-width: 130px; /* Adjust width as needed */
   height: auto;
   display: block;
   margin: 0 auto;
+  margin-top: 15px;
 }
 
 /* Buttons are aligned to the right */
