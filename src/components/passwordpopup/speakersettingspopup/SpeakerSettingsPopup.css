@@ -47,3 +47,10 @@
   height: 16px;
   cursor: pointer;
 }
+
+.tabs-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  cursor: pointer;
+}

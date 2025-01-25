@@ -89,7 +89,6 @@ const SpeakerSettingsPopup = ({ closePopup, setBillDetails }) => {
         </div>
       </div>
       
-      {/* Tab Content */}
       <div className="tab-content">
         {activeTab === "configureBills" && (
           <div>
