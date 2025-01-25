@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 20vh;
+    height: 10vh;
     padding: 20px;
     border-radius: 6px;
     background-color: rgb(246, 246, 246);
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     margin: auto;
     margin-bottom: 20px;
     position: relative; /* Ensures child elements position relative to this container */
