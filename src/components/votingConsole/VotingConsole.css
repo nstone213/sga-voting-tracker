@@ -29,3 +29,7 @@
   flex: 1; /* Ensure equal distribution of space */
   min-width: 250px; /* Prevent excessive shrinking */
 }
+
+.announcements-section {
+  margin-top: 20px;
+}
