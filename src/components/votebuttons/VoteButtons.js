@@ -28,7 +28,7 @@ const VoteButtons = ({ user, handleVote }) => {
   return (
     <div className="voting-container">
         <div className="voting-details">
-            <p>asfjfjfffjf in progress...</p>
+            <p>Voting in progress...</p>
             <p>xx:xx:xx</p>
         </div>
         <h2 className="bill-title">BILL TBD</h2>
