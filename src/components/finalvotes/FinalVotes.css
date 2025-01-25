@@ -36,7 +36,7 @@
     flex-wrap: wrap;
     gap: 10px;
     row-gap: 10px; /* Added space between rows */
-    justify-content: center;
+    justify-content: flex-start;
   }
   
   /* Vote boxes */
