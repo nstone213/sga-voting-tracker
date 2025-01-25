@@ -3,7 +3,7 @@ import "./UserInfo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Sidebar from "../sidebar/Sidebar";
 import PasswordPopup from "../passwordpopup/PasswordPopup"; // Import the new popup component
-import sgalogo from "../assets/sgalogo.png"; // Ensure the correct path to your image
+import gtPoliTechslogo from "../assets/gtPoliTechslogo.png"; // Ensure the correct path to your image
 import SpeakerSettingsPopup from "../passwordpopup/speakersettingspopup/SpeakerSettingsPopup";
 
 
@@ -35,7 +35,7 @@ const UserInfo = ({ name, isDarkMode, handleSignOut }) => {
         </div>
 
         <div className="title">
-          <img src={sgalogo} alt="SGA Logo" className="sgalogo" />
+          <img src={gtPoliTechslogo} alt="gtPoliTechs Logo" className="gtPoliTechslogo" />
         </div>
 
         <div className="button-group">

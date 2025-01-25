@@ -35,8 +35,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    row-gap: 30px; /* Added space between rows */
-    justify-content: center;
+    row-gap: 10px; /* Added space between rows */
+    justify-content: flex-start;
   }
   
   /* Vote boxes */
@@ -61,58 +61,3 @@
   .vote-box.none {
     background-color: gray;
   }
-
-/* Expanded modal */
-.results-modal.expanded {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  background: white;
-  padding: 20px;
-  border-radius: 6px;
-  
-  /* Increase width */
-  width: 100vw; /* Takes up 90% of viewport width */
-  max-width: 1300px; /* Increase to allow a bigger modal */
-  
-  /* Increase height */
-  height: 80vh; /* Default to auto or set a specific height */
-  max-height: 80vh; /* Avoids too much overflow */
-  
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  overflow-y: auto; /* Adds scrolling if content overflows */
-}
-
-/* Close button */
-.close-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color: red;
-}
-
-.no-scroll {
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(132, 143, 201, 0.5);
-  z-index: 1000;
-  pointer-events: all;
-}

@@ -69,7 +69,7 @@ const VotingConsole = ({ user, votes, handleVote }) => {
             setSelectedVote={setSelectedVote} 
             isSubmitted={isSubmitted} 
             user={user} 
-            handleVote={handleVote} 
+            handleVote={handleVote}
           />
         </div>
       </div>
