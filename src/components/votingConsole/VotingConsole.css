@@ -3,11 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Aligns items at the top */
-  gap: 20px; /* Adds space between RollCall and the other sections */
+  gap: 0px; /* Adds space between RollCall and the other sections */
   width: 100%;
   max-width: 1300px;
   margin: auto;
-  margin-right: 130px;
+  margin-right: 110px;
   padding: 20px;
 }
 
@@ -17,4 +17,23 @@
   align-items: center;
   height: 60vh; /* Ensures vertical centering */
   text-align: center;
+}
+
+.middle-section {
+  flex-grow: 1; /* Allow this section to expand */
+  gap: 20px; /* Space between roll call and announcements */
+  width: 100%; /* Ensure it spans full width */
+}
+
+.rollcall-section, .announcements-section {
+  flex: 1; /* Ensure equal distribution of space */
+  min-width: 250px; /* Prevent excessive shrinking */
+}
+
+.announcements-section {
+  margin-top: 20px;
+}
+
+.liveupdates-section {
+  margin-top: 20px;
 }
