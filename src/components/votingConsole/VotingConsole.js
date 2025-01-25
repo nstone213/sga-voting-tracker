@@ -6,6 +6,7 @@ import RollCall from "../rollcall/RollCall";
 import VoteButtons from "../votebuttons/VoteButtons";
 import Agenda from "../agenda/Agenda";
 import Announcements from "../announcements/Announcements";
+import LiveUpdates from "../liveupdates/LiveUpdates";
 
 const VotingConsole = ({ user, votes, handleVote }) => {
   const [countdown, setCountdown] = useState(5);
@@ -48,6 +49,9 @@ const VotingConsole = ({ user, votes, handleVote }) => {
     <div className="voting-console">
       <Agenda />
       <div className="middle-section">
+        <div className="liveupdates-section">
+          <LiveUpdates />
+        </div>
         <div className="rollcall-section">
           <RollCall />
         </div>
