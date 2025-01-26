@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./SpeakerSettingsPopup.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ConfigureBills from "./speakercomponents/configurebills/ConfigureBills";
+import MakeAnnouncement from "./speakercomponents/makeannouncement/MakeAnnouncement";
+import UpdateAgenda from "./speakercomponents/updateagenda/UpdateAgenda";
 
 const SpeakerSettingsPopup = ({ closePopup }) => {
   const [activeTab, setActiveTab] = useState("configureBills");

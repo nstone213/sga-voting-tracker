@@ -3,7 +3,6 @@ import { db } from "../../../../firebaseconfig/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import "./ConfigureBills.css";
 
-
 const ConfigureBills = ({ setBillDetails }) => {
   const [billName, setBillName] = useState("");
   const [timeValue, setTimeValue] = useState("");
