@@ -57,8 +57,21 @@
   .vote-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    border: none;
+  }
+
+  .vote-button.abstain:hover:disabled {
+    background-color: rgb(242, 242, 69);
+  }
+
+  .vote-button.yay:hover:disabled {
+    background-color: rgb(130, 202, 130);
   }
   
+  .vote-button.nay:hover:disabled {
+    background-color: rgb(236, 85, 85);
+  }
+
   .voting-details {
     display: flex;
     align-items: center;
