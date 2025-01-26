@@ -4,7 +4,7 @@ import { doc, setDoc } from "firebase/firestore";
 import "./ConfigureBills.css";
 
 
-const ConfigureBills = () => {
+const ConfigureBills = ({ setBillDetails }) => {
 
   return (
 
