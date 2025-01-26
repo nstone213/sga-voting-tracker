@@ -11,10 +11,14 @@ const Announcements = () => {
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       if (!snapshot.empty) {
-        const latest = snapshot.docs[0].data();
+        const latestDoc = snapshot.docs[0].data();
+
+        console.log("Latest announcement from Firestore:", latestDoc); // Debugging log
+
         setLatestAnnouncement({
-          text: latest.text,
-          timestamp: latest.timestamp?.toDate().toLocaleString(), // Formats timestamp
+          text: latestDoc.text,
+          timestamp: latestDoc.timestamp?.toDate().toLocaleString(),
+          userName: latestDoc.userName || "Unknown User", // Ensure the correct field is used
         });
       }
     });
@@ -27,7 +31,9 @@ const Announcements = () => {
       <h3>Latest Announcement</h3>
       {latestAnnouncement ? (
         <div>
-          <p>{latestAnnouncement.text}</p>
+          <p>
+            <strong>{latestAnnouncement.userName}:</strong> {latestAnnouncement.text}
+          </p>
           <p className="timestamp">Posted on: {latestAnnouncement.timestamp}</p>
         </div>
       ) : (
