@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "../../firebaseconfig/firebaseConfig";
+import { db } from "../../../../firebaseconfig/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import "./ConfigureBills.css";
 
@@ -8,6 +8,7 @@ const ConfigureBills = ({ setBillDetails }) => {
   const [billName, setBillName] = useState("");
   const [timeValue, setTimeValue] = useState("");
   const [discussion, setDiscussion] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!billName.trim()) {

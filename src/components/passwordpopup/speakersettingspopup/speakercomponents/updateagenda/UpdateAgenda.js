@@ -4,7 +4,7 @@ import "./UpdateAgenda.css";
 const UpdateAgenda = () => {
 
   return (
-
+    <div></div>
   );
 };
 

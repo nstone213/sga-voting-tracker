@@ -5,7 +5,7 @@ import "./MakeAnnouncement.css";
 const MakeAnnouncement = () => {
 
   return (
-
+    <div></div>
   );
 };
 
