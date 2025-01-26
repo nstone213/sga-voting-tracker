@@ -5,7 +5,6 @@ import "./ConfigureBills.css";
 
 
 const ConfigureBills = ({ setBillDetails }) => {
-  const [activeTab, setActiveTab] = useState("configureBills");
   const [billName, setBillName] = useState("");
   const [timeValue, setTimeValue] = useState("");
   const [discussion, setDiscussion] = useState(false);
@@ -41,7 +40,47 @@ const ConfigureBills = ({ setBillDetails }) => {
   };
 
   return (
-
+    <div>
+        <div className="input-group">
+            <input
+                type="text"
+                id="bill-name"
+                value={billName}
+                onChange={(e) => setBillName(e.target.value)}
+                className="bill-input"
+                placeholder="Bill Name"
+            />
+        </div>
+        
+        <div className="input-group">
+            <input
+                className="discussion-checkbox"
+                type="checkbox"
+                checked={discussion}
+                onChange={() => setDiscussion(!discussion)}
+            />
+            <label>Discussion?</label>
+        </div>
+        
+        {discussion && (
+        <div className="input-group">
+            <label htmlFor="time-input">Time (minutes):</label>
+            <input
+            type="number"
+            id="time-input"
+            value={timeValue}
+            onChange={(e) => setTimeValue(e.target.value)}
+            className="time-input"
+            placeholder="Enter Time"
+            min="0"
+            />
+        </div>
+        )}
+        
+        <button className="submit-button" onClick={handleSubmit} disabled={loading}>
+        {loading ? "Saving..." : "Submit"}
+        </button>
+    </div>
   );
 };
 
