@@ -65,11 +65,11 @@
   }
 
   .vote-button.yay:hover:disabled {
-    background-color: rgb(130, 202, 130);
+    background-color: rgba(15, 186, 129, 255);
   }
   
   .vote-button.nay:hover:disabled {
-    background-color: rgb(236, 85, 85);
+    background-color: rgb(214, 75, 75);
   }
 
   .voting-details {
