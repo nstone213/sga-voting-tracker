@@ -5,6 +5,10 @@ import "./ConfigureBills.css";
 
 
 const ConfigureBills = ({ setBillDetails }) => {
+  const [activeTab, setActiveTab] = useState("configureBills");
+  const [billName, setBillName] = useState("");
+  const [timeValue, setTimeValue] = useState("");
+  const [discussion, setDiscussion] = useState(false);
 
   return (
 
