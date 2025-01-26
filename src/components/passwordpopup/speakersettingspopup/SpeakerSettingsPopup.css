@@ -36,18 +36,6 @@
   text-align: center;
 }
 
-.input-group {
-  display: flex;
-  align-items: center; /* Aligns items vertically */
-  gap: 10px; /* Adds spacing between elements */
-}
-
-.discussion-checkbox {
-  width: 16px; /* Ensure consistent size */
-  height: 16px;
-  cursor: pointer;
-}
-
 .tabs-container {
   display: flex;
   justify-content: space-between;

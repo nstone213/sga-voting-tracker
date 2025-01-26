@@ -1,0 +1,11 @@
+.discussion-checkbox {
+    width: 16px; /* Ensure consistent size */
+    height: 16px;
+    cursor: pointer;
+}
+
+.input-group {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    gap: 10px; /* Adds spacing between elements */
+}
