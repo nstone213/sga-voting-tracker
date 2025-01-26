@@ -62,17 +62,11 @@ const SpeakerSettingsPopup = ({ closePopup }) => {
         )}
         
         {activeTab === "makeAnnouncement" && (
-          <div>
-            <h3>Make an Announcement</h3>
-            <p>Coming soon: Enter your announcement details here.</p>
-          </div>
+          <MakeAnnouncement />
         )}
         
         {activeTab === "updateAgenda" && (
-          <div>
-            <h3>Update Agenda</h3>
-            <p>Coming soon: Modify your meeting agenda here.</p>
-          </div>
+          <UpdateAgenda />
         )}
       </div>
     </div>
