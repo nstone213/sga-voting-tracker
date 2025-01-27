@@ -50,7 +50,7 @@ const RollCall = () => {
 
       {/* Fixed footer in the bottom right */}
       <div className="rollcall-footer">
-        <p>Quorum: --</p>
+        <p>Quorum: 41</p>
         <p>Members Logged: {activeUserCount}</p> {/* Dynamically updates active users */}
       </div>
     </div>
