@@ -6,7 +6,7 @@ const LiveUpdates = () => {
   
   return (
     <div className='liveupdates-container'>
-      <p>Live Updates</p>
+      <p>// Live Updates coming soon //</p>
     </div>
   );
 };

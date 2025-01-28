@@ -12,4 +12,9 @@
     margin: auto;
     margin-bottom: 20px;
     position: relative; /* Ensures child elements position relative to this container */
+    margin-top: -20px;
   }
+
+.liveupdates-container p {
+  color: #00000025;
+}

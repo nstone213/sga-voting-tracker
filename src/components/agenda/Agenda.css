@@ -11,7 +11,7 @@
     padding: 10px;
     margin: auto;
     overflow: visible; /* Prevents content from escaping */
-    margin-top: -10px;
+    margin-top: 0px;
     position: relative; /* Needed for absolute positioning of fade effect */
 }
 
